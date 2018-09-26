@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">Stock</string>
+    <string name="retry">Retry</string>
+    <string name="post_error">An error occurred while loading the posts</string>
+    <string name="title_edit">Edit</string>
+    <string name="title_add">Add</string>
+
+    <string name="title_unit">Unit</string>
+
+    <string name="hello_blank_fragment" translatable="false">Hello blank fragment</string>
+
+    <!-- unitMeasure -->
+    <string name="unit_description">Description</string>
+    <string name="unit_name">Name</string>
+
+    <string name="unit_hint_name">Unit name</string>
+    <string name="unit_hint_description">Unit Description</string>
+    <string name="new_unit">New unitMeasure</string>
+    <string name="title_category">Category</string>
+</resources>

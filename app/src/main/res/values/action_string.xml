@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="success_insert_action">create successfully</string>
+    <string name="success_update_action">update successfully</string>
+    <string name="submit_action">Submit</string>
+    <string name="cancel_action">Cancel</string>
+</resources>
