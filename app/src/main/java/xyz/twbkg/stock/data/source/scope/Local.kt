@@ -11,6 +11,6 @@ import javax.inject.Qualifier
  */
 
 @Qualifier
-@Documented
-@Retention(RetentionPolicy.RUNTIME)
+@kotlin.annotation.MustBeDocumented
+@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
 annotation class Local
