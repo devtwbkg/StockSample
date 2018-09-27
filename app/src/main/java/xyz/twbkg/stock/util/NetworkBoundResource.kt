@@ -1,5 +1,6 @@
 package xyz.twbkg.stock.util
 
+import android.content.Context
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.exceptions.Exceptions
@@ -8,9 +9,14 @@ import retrofit2.HttpException
 import xyz.twbkg.stock.data.Resource
 import java.io.IOException
 import javax.inject.Inject
+import kotlin.coroutines.experimental.coroutineContext
 
-abstract class NetworkBoundResource<ResultType, RequestType> @Inject constructor( networkUtils: NetworkUtils) {
-
+abstract class NetworkBoundResource<ResultType, RequestType>(var networkUtils: NetworkUtils) {
+//
+//    @Inject
+//    lateinit var networkUtil: NetworkUtils
+//    @Inject
+//    lateinit var context: Context
     private val result: Flowable<Resource<ResultType>>
 
     init {

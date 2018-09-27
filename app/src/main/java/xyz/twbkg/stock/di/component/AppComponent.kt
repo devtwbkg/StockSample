@@ -8,6 +8,7 @@ import dagger.android.support.AndroidSupportInjectionModule
 import xyz.twbkg.stock.MainApp
 import xyz.twbkg.stock.di.builder.ActivityBinder
 import xyz.twbkg.stock.di.module.AppModule
+import xyz.twbkg.stock.di.module.NetworkModule
 import javax.inject.Singleton
 
 

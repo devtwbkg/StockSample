@@ -11,20 +11,18 @@ import xyz.twbkg.stock.data.source.database.AppDataBase
 import xyz.twbkg.stock.data.source.local.category.CategoryDao
 import javax.inject.Singleton
 
-@Suppress("unused")
 @Module
 class StorageModule {
     @Provides
     @Singleton
-    fun providesSharedPreferences(context: Context): SharedPreferences {
+    fun providesSharedPreferences(context: Application): SharedPreferences {
         return PreferenceManager.getDefaultSharedPreferences(context)
     }
-
 
     @Singleton
     @Provides
     fun provideDb(app: Application): AppDataBase = Room
-            .databaseBuilder(app, AppDataBase::class.java, "stock.db")
+            .databaseBuilder(app, AppDataBase::class.java, "mini_stock.db")
             .fallbackToDestructiveMigration()
             .build()
 

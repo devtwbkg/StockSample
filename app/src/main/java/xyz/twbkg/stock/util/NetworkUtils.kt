@@ -8,9 +8,9 @@ import javax.inject.Inject
 /**
  * Checks if a network connection exists.
  */
-open class NetworkUtils @Inject constructor(val context: Context) {
+class NetworkUtils @Inject constructor(val context: Context) {
 
-    open fun hasNetworkConnection(): Boolean {
+    fun hasNetworkConnection(): Boolean {
         val connectivityManager =
                 context.getSystemService(CONNECTIVITY_SERVICE) as ConnectivityManager
         val activeNetworkInfo = connectivityManager.activeNetworkInfo

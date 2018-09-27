@@ -1,4 +1,4 @@
-package twbkg.xyz.stock.data.source.scope
+package xyz.twbkg.stock.data.source.scope
 
 import java.lang.annotation.Documented
 import java.lang.annotation.Retention

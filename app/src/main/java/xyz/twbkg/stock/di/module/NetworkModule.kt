@@ -1,8 +1,11 @@
 package xyz.twbkg.stock.di.module
 
+import android.app.Application
 import android.content.Context
 import com.facebook.stetho.okhttp3.StethoInterceptor
+import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import com.jakewharton.retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -12,13 +15,13 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import xyz.twbkg.stock.BuildConfig
+import xyz.twbkg.stock.MainApp
 import xyz.twbkg.stock.constants.Constants
 import xyz.twbkg.stock.util.NetworkUtils
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@Suppress("unused")
-@Module(includes = [ApiModule::class])
+@Module
 class NetworkModule {
 
     @Provides
@@ -57,15 +60,17 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun providesOkhttpCache(context: Context): Cache {
+    fun providesOkhttpCache(context: Application): Cache {
         val cacheSize = 10 * 1024 * 1024 // 10 MB
         return Cache(context.cacheDir, cacheSize.toLong())
     }
 
     @Provides
     @Singleton
-    fun providesGson(): Gson {
-        return Gson()
+    fun provideGson(): Gson {
+        val gsonBuilder = GsonBuilder()
+        gsonBuilder.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+        return gsonBuilder.create()
     }
 
     @Provides
@@ -80,7 +85,7 @@ class NetworkModule {
         return RxJava2CallAdapterFactory.create()
     }
 
-    @Provides
-    @Singleton
-    fun providesNetworkUtil(context: Context): NetworkUtils = NetworkUtils(context)
+//    @Provides
+//    @Singleton
+//    fun providesNetworkUtil(context: Application): NetworkUtils = NetworkUtils(context)
 }

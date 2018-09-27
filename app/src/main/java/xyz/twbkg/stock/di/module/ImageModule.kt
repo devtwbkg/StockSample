@@ -1,5 +1,6 @@
 package xyz.twbkg.stock.di.module
 
+import android.app.Application
 import android.content.Context
 import com.jakewharton.picasso.OkHttp3Downloader
 import com.squareup.picasso.Picasso
@@ -18,7 +19,7 @@ class ImageModule {
 
     @Provides
     @Singleton
-    fun providesPicasso(context: Context, okHttp3Downloader: OkHttp3Downloader): Picasso {
+    fun providesPicasso(context: Application, okHttp3Downloader: OkHttp3Downloader): Picasso {
         return Picasso.Builder(context)
                 .downloader(okHttp3Downloader)
                 .build()

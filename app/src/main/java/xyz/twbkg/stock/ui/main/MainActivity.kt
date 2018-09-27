@@ -9,7 +9,7 @@ import xyz.twbkg.stock.util.extension.configToolbars
 import xyz.twbkg.stock.util.extension.inflateFragment
 
 class MainActivity : BaseActivity() {
-    override fun enableHome(): Boolean = false
+    override fun enableHome(): Boolean = true
     override fun configToolbar(): Toolbar? = toolbar
 
     override fun onCreate(savedInstanceState: Bundle?) {

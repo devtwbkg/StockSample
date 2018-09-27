@@ -21,10 +21,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField 'String', 'BASE_URL', '"http://jsonplaceholder.typicode.com/"'
+            buildConfigField 'String', 'BASE_URL', '"http://10.90.61.86:112/"'
         }
         debug {
-            buildConfigField 'String', 'BASE_URL', '"http://jsonplaceholder.typicode.com/"'
+            buildConfigField 'String', 'BASE_URL', '"http://10.90.61.86:112/"'
         }
     }
     compileOptions {
@@ -57,9 +57,11 @@ dependencies {
     implementation deps.support.constaintLayout
 
     implementation deps.android.lifecycleExt
-    implementation deps.android.lifecycleCommon
     implementation deps.android.roomRuntime
     implementation deps.android.roomRx
+
+    kapt deps.android.lifecycleCommon
+    kapt deps.android.roomCompiler
 
     implementation deps.kotlin.stdlib
 
