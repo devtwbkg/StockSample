@@ -19,6 +19,9 @@ class CategoryRepository @Inject constructor(
 ) {
     fun loadContents(): Flowable<Resource<List<Category>>> {
         return object : NetworkBoundResource<List<Category>, CategoryResponse>(networkUtils) {
+            override fun createFail(): Flowable<CategoryResponse> {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
 
             override fun shouldFetch(data: List<Category>): Boolean = data.isEmpty()
 

@@ -46,8 +46,15 @@ class MainViewModel @Inject constructor(private var categoryRepository: Category
                         is Resource.Failure -> {
                             loadingVisibility.value = View.GONE
                             errorMessage.value = R.string.post_error
-                            Timber.d("Resource.Failure")
+                            Timber.d("Resource.Failure $resource")
                             // show error state
+                        }
+
+                        is Resource.Error -> {
+                            errorMessage.value = R.string.post_error
+                            loadingVisibility.value = View.GONE
+                            contents.value = resource.data
+                            Timber.d("Resource.Error ${resource.toString()}")
                         }
                         else -> throw IllegalStateException("State not known or implemented.")
                     }

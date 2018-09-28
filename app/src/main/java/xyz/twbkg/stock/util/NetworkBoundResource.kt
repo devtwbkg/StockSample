@@ -1,16 +1,19 @@
 package xyz.twbkg.stock.util
 
+import android.arch.lifecycle.Transformations.map
 import io.reactivex.Flowable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.exceptions.Exceptions
 import io.reactivex.schedulers.Schedulers
+import org.intellij.lang.annotations.Flow
 import retrofit2.HttpException
 import timber.log.Timber
 import xyz.twbkg.stock.data.Resource
+import xyz.twbkg.stock.data.model.db.Category
 import java.io.IOException
 
-abstract class NetworkBoundResource<ResultType, RequestType>(var networkUtils: NetworkUtils) {
-    private val result: Flowable<Resource<ResultType>>
+abstract class NetworkBoundResource<ResultType, RequestType>(networkUtils: NetworkUtils) {
+    private lateinit var result: Flowable<Resource<ResultType>>
 
     init {
         // Lazy disk observable.
@@ -29,19 +32,19 @@ abstract class NetworkBoundResource<ResultType, RequestType>(var networkUtils: N
                     .observeOn(Schedulers.computation())
                     .doOnNext { request -> saveCallResult(request) }
                     .onErrorReturn { throwable: Throwable ->
-                        Timber.e("onErrorReturn $throwable")
+                        //                        Timber.e("onErrorReturn $throwable")
                         when (throwable) {
                             is HttpException -> {
                                 throw Exceptions.propagate(throwable)
-                                //                                throw Exceptions.propagate(NetworkExceptions.getNoServerConnectivityError(context))
+                                // throw Exceptions.propagate(NetworkExceptions.getNoServerConnectivityError(context))
                             }
                             is IOException -> {
                                 throw Exceptions.propagate(throwable)
-                                //                                throw Exceptions.propagate(NetworkExceptions.getNoNetworkConnectivityError(context))
+                                // throw Exceptions.propagate(NetworkExceptions.getNoNetworkConnectivityError(context))
                             }
                             else -> {
                                 throw Exceptions.propagate(throwable)
-                                //                                throw Exceptions.propagate(NetworkExceptions.getUnexpectedError(context))
+                                // throw Exceptions.propagate(NetworkExceptions.getUnexpectedError(context))
                             }
                         }
                     }
@@ -51,7 +54,14 @@ abstract class NetworkBoundResource<ResultType, RequestType>(var networkUtils: N
         result = when {
             networkUtils.hasNetworkConnection() -> networkObservable
                     .map<Resource<ResultType>> { Resource.Success(it) }
-                    .onErrorReturn { Resource.Failure(it) }
+                    .onErrorReturn {
+                        loadFromDb().blockingFirst()
+                        if (loadFromDb().blockingFirst() != null) {
+                            Resource.Error(it, loadFromDb().blockingFirst())
+                        } else {
+                            Resource.Failure(it)
+                        }
+                    }
                     // Read results in Android Main Thread (UI)
                     .observeOn(AndroidSchedulers.mainThread())
                     .startWith(Resource.Loading)
@@ -73,4 +83,6 @@ abstract class NetworkBoundResource<ResultType, RequestType>(var networkUtils: N
     protected abstract fun loadFromDb(): Flowable<ResultType>
 
     protected abstract fun createCall(): Flowable<RequestType>
+
+    protected abstract fun createFail(): Flowable<RequestType>
 }
