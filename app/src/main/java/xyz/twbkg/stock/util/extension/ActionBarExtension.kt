@@ -13,3 +13,12 @@ fun AppCompatActivity.configToolbars(toolbar: Toolbar, isEnableHomeButton: Boole
         }
     }
 }
+
+
+fun AppCompatActivity.title(title: String) {
+    this.apply {
+        supportActionBar?.let { actionbar ->
+            actionbar.title =title
+        }
+    }
+}

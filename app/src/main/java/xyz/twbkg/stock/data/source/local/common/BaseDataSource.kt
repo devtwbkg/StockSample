@@ -14,9 +14,11 @@ interface BaseDataSource<T> {
 
     fun save(@NonNull model: T): Completable
 
+    fun saveAll(@NonNull model: List<T>): Completable
+
     fun update(@NonNull model: T): Completable
 
-    fun refreshTasks()
+    fun refreshData()
 
     fun deleteAll(): Completable
 

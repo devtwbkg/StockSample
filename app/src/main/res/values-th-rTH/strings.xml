@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="retry">ลองอีกครั้ง</string>
+    <string name="cancel_action">ยกเลิก</string>
+    <string name="please_input_your_name">กรุณากรอกชื่อ</string>
+    <string name="position_not_found">ไม่พบข้อมูล</string>
+    <string name="submit_action">บันทึก</string>
+    <string name="success_insert_action">บันทึกข้อมูลสำเร็จ</string>
+    <string name="success_update_action">แก้ไขข้อมูลสำเร็จ</string>
+    <string name="new_category">เพิ่มประเภท</string>
+    <string name="post_error">เกิดข้อผิดพลาดในขณะโหลดข้อมูล</string>
+    <string name="title_edit">แก้ไข</string>
+    <string name="title_add">เพิ่ม</string>
+    <string name="title_unit">หน่วยนับ</string>
+    <string name="title_category">ประเภท</string>
+
+    <!-- unitMeasure -->
+    <string name="unit_description">รายละเอียด:</string>
+    <string name="unit_name">ชื่อ:</string>
+
+    <string name="unit_hint_name">ชื่อ</string>
+    <string name="unit_hint_description">รายละเอียด</string>
+
+
+    <string name="category_description">รายละเอียด:</string>
+    <string name="category_name">ชื่อ:</string>
+    <string name="category_hint_name">ชื่อ</string>
+    <string name="category_hint_description">รายละเอียด</string>
+
+    <string name="new_unit">New unitMeasure</string>
+    <string name="data_must_not_empty">กรุณาป้อนข้อมูลให้ครบ</string>
+    <string name="action_fail">ดำเนินการล้มเหลว</string>
+    <string name="result_not_found">ไม่พบข้อมูล</string>
+    <!-- end unitMeasure -->
+</resources>

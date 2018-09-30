@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="please_input_your_name">Please input your name</string>
+    <string name="data_must_not_empty"> Data must not empty</string>
 </resources>

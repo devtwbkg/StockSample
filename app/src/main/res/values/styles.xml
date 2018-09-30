@@ -1,10 +1,10 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- inherit from the material theme -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Main theme colors -->
         <!--   your app branding color for the app bar -->
-        <item name="colorPrimary">@color/white</item>
+        <item name="colorPrimary">@color/indigo</item>
         <!--   darker variant for the status bar and contextual app bars -->
         <item name="colorPrimaryDark">@color/white</item>
         <!--   theme UI controls like checkboxes and text fields -->
@@ -12,7 +12,7 @@
 
         <item name="actionBarStyle">@style/AppTheme.AppBarOverlay.ActionBar</item>
         <item name="toolbarStyle">@style/CustomToolBarStyle</item>
-        <item name="fontFamily">@font/kanit_light</item>
+        <item name="android:fontFamily">@font/kanit_light</item>
 
     </style>
 
@@ -28,7 +28,7 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="MyToolBarStyle" parent="Widget.AppCompat.Toolbar">
-        <item name="background">@color/white</item>
+        <item name="android:background">@color/white</item>
         <item name="contentInsetStartWithNavigation">0dp</item>
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
@@ -67,7 +67,7 @@
     <style name="CustomToolBarStyle" parent="@style/Widget.AppCompat.Toolbar">
         <item name="popupTheme">@style/ThemeOverlay.AppCompat.Light</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
-        <item name="background">@color/white</item>
+        <item name="android:background">@color/white</item>
         <item name="titleTextColor">@color/gray_800</item>
         <item name="subtitleTextColor">@color/gray_800</item>
         <item name="actionMenuTextColor">@color/gray_800</item>
@@ -76,12 +76,12 @@
 
     <style name="AppTheme.AppBarOverlay.ActionBar">
         <item name="background">@color/white</item>
-        <item name="fontFamily">@font/kanit_regular</item>
+        <item name="android:fontFamily">@font/kanit_regular</item>
         <item name="android:textColor">@color/gray_800</item>
         <item name="android:textStyle">bold</item>
-        <item name="titleTextAppearance">@font/kanit_regular</item>
-        <item name="subtitleTextAppearance">@font/kanit_regular</item>
-        <item name="elevation">4dp</item>
+        <item name="android:titleTextAppearance">@font/kanit_regular</item>
+        <item name="android:subtitleTextAppearance">@font/kanit_regular</item>
+        <item name="android:elevation">4dp</item>
     </style>
 
     <style name="AppTheme.ActionBar.TitleTextStyle" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
@@ -102,7 +102,7 @@
         <item name="colorAccent">@color/indigo</item>
         <item name="colorControlNormal">@color/indigo_dark</item>
         <!-- Define window properties as desired -->
-        <item name="windowNoTitle">false</item>
+        <item name="android:windowNoTitle">false</item>
         <item name="android:windowFullscreen">false</item>
         <item name="android:windowBackground">@color/green_200</item>
         <item name="android:windowIsFloating">true</item>
@@ -116,32 +116,30 @@
         <item name="android:layout_gravity">center</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="background">@drawable/shape_background_dialog</item>
+        <item name="android:background">@drawable/shape_background_dialog</item>
     </style>
 
     <style name="AppTheme.EditText">
-        <item name="background">@drawable/selector_edi_text</item>
+        <item name="android:background">@drawable/selector_edi_text</item>
         <item name="android:imeOptions">actionNext</item>
     </style>
 
     <style name="AppTheme.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">38dp</item>
-        <item name="fontFamily">@font/kanit_regular</item>
+        <item name="android:fontFamily">@font/kanit_regular</item>
     </style>
 
     <style name="AppTheme.Button.Submit">
-        <item name="background">@drawable/selector_submit_button</item>
+        <item name="android:background">@drawable/selector_submit_button</item>
         <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="AppTheme.Button.Cancel">
-        <item name="background">@drawable/selector_cancel_button</item>
+        <item name="android:background">@drawable/selector_cancel_button</item>
     </style>
 
     <style name="AppTheme.Item">
-        <item name="background">@color/white</item>
+        <item name="android:background">@color/white</item>
     </style>
-
 </resources>
-

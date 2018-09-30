@@ -13,7 +13,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name="xyz.twbkg.stock.ui.main.MainActivity">
+        <activity android:name=".ui.main.MainActivity">
+
+        </activity>
+        <activity
+            android:name=".ui.category.AddEditCategoryActivity"
+            android:label="@string/title_add"
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".ui.category.CategoryDetailActivity" />
+        <activity
+            android:name=".ui.category.CategoryActivity"
+            android:label="@string/title_category">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

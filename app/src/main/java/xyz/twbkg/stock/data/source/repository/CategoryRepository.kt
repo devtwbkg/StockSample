@@ -1,11 +1,13 @@
 package xyz.twbkg.stock.data.source.repository
 
 import io.reactivex.Flowable
+import io.reactivex.Observable
 import xyz.twbkg.stock.data.Resource
 import xyz.twbkg.stock.data.model.db.Category
 import xyz.twbkg.stock.data.model.response.CategoryResponse
 import xyz.twbkg.stock.data.source.local.category.CategoryDao
 import xyz.twbkg.stock.data.source.remote.category.CategoryService
+import xyz.twbkg.stock.networking.ApiResource
 import xyz.twbkg.stock.util.NetworkBoundResource
 import xyz.twbkg.stock.util.NetworkUtils
 import javax.inject.Inject
@@ -38,5 +40,27 @@ class CategoryRepository @Inject constructor(
             }
 
         }.asFlowable()
+    }
+
+    fun loadContentsV2(): Observable<ApiResource<List<Category>>> {
+        return object : xyz.twbkg.stock.networking.NetworkBoundResource<List<Category>, CategoryResponse>() {
+            override fun saveCallResult(item: CategoryResponse) {
+                categoryDao.insertAll(item.data)
+            }
+
+            override fun shouldFetch(data: List<Category>): Boolean {
+                return data.isEmpty()
+            }
+
+            override fun loadFromDb(): Flowable<List<Category>> {
+                return categoryDao.findAll()
+            }
+
+            override fun createCall(): Observable<CategoryResponse> {
+                return categoryService.getCategoryV2()
+            }
+
+
+        }.asObservable()
     }
 }

@@ -15,6 +15,21 @@
 
     <string name="unit_hint_name">Unit name</string>
     <string name="unit_hint_description">Unit Description</string>
+
+
+    <string name="category_description">Description</string>
+    <string name="category_name">Name</string>
+    <string name="category_hint_name">Name</string>
+    <string name="category_hint_description">Description</string>
+
+
     <string name="new_unit">New unitMeasure</string>
     <string name="title_category">Category</string>
+
+
+    <string name="success_insert_action">create successfully</string>
+    <string name="success_update_action">update successfully</string>
+    <string name="submit_action">Submit</string>
+    <string name="cancel_action">Cancel</string>
+    <string name="result_not_found">Result not found.</string>
 </resources>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/addeditcategory"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.category.addedit.AddEditCategoryFragment">
+
+    <android.support.v4.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="260dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="16dp">
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/input_name_edt"
+                    style="@style/AppTheme.EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/unit_hint_name"
+                    android:nextFocusDown="@+id/input_description_edt"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+
+                <android.support.v7.widget.AppCompatEditText
+                    android:id="@+id/input_description_edt"
+                    style="@style/AppTheme.EditText"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:hint="@string/unit_hint_description"
+                    android:imeOptions="actionDone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/input_name_edt" />
+
+            </android.support.constraint.ConstraintLayout>
+
+            <android.support.v7.widget.LinearLayoutCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="horizontal">
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/cancel_btn"
+                    style="@style/AppTheme.Button.Cancel"
+                    android:layout_marginEnd="8dp"
+                    android:text="@string/cancel_action"
+                    app:layout_constraintStart_toStartOf="@+id/input_description_edt"
+                    app:layout_constraintTop_toBottomOf="@+id/input_description_edt" />
+
+                <android.support.v7.widget.AppCompatButton
+                    android:id="@+id/submit_btn"
+                    style="@style/AppTheme.Button.Submit"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/submit_action"
+                    app:layout_constraintEnd_toEndOf="@+id/input_description_edt"
+                    app:layout_constraintTop_toBottomOf="@+id/input_description_edt" />
+
+            </android.support.v7.widget.LinearLayoutCompat>
+        </android.support.v7.widget.LinearLayoutCompat>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.constraint.ConstraintLayout>

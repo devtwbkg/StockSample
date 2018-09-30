@@ -21,10 +21,10 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            buildConfigField 'String', 'BASE_URL', '"http://10.90.61.86:112/"'
+            buildConfigField 'String', 'BASE_URL', '"http://192.168.1.4:112/"'
         }
         debug {
-            buildConfigField 'String', 'BASE_URL', '"http://10.90.61.86:112/"'
+            buildConfigField 'String', 'BASE_URL', '"http://192.168.1.4:112/"'
         }
     }
     compileOptions {
@@ -60,6 +60,9 @@ dependencies {
     implementation deps.android.roomRuntime
     implementation deps.android.roomRx
 
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
+    implementation 'android.arch.lifecycle:extensions:1.1.1'
     kapt deps.android.lifecycleCommon
     kapt deps.android.roomCompiler
 
@@ -94,4 +97,3 @@ dependencies {
     api deps.facebook.networkInterceptor
 
 }
-

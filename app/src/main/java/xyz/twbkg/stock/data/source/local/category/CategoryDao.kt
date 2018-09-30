@@ -14,6 +14,8 @@ interface CategoryDao {
     @Query("SELECT * FROM category")
     fun findAll(): Flowable<List<Category>>
 
+    @Query("SELECT * FROM category WHERE id = (SELECT max(id) FROM CATEGORY)")
+    fun findLastId(): Category
 
     /**
      * Select a category (item) by id.
