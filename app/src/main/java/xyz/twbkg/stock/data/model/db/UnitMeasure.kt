@@ -6,9 +6,9 @@ import android.arch.persistence.room.PrimaryKey
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
-@Entity(tableName = "category")
+@Entity(tableName = "unit")
 @Parcelize
-data class Category(
+data class UnitMeasure(
         @ColumnInfo(name = "name")
         var name: String = "",
         @ColumnInfo(name = "description")

@@ -24,6 +24,10 @@
         <activity
             android:name=".ui.category.CategoryActivity"
             android:label="@string/title_category">
+        </activity>
+        <activity
+            android:name=".ui.unit.UnitActivity"
+            android:label="@string/title_unit">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

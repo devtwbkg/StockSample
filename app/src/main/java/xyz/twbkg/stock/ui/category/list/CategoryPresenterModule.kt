@@ -3,10 +3,9 @@ package xyz.twbkg.stock.ui.category.list
 import dagger.Module
 import dagger.Provides
 import xyz.twbkg.stock.data.source.repository.CategoryRepo
-import xyz.twbkg.stock.ui.category.adapter.CategoryListAdapter
 
-@Module
-class CategoryPresenterModule {
+
+@Module class CategoryPresenterModule {
 
     @Provides
     fun provideView(
@@ -19,5 +18,4 @@ class CategoryPresenterModule {
             categoryRepo: CategoryRepo
     ): CategoryContract.Presenter =
             CategoryPresenter(view, categoryRepo)
-
 }

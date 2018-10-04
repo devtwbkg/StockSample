@@ -8,12 +8,15 @@ import kotlinx.android.synthetic.main.add_edit_category_fragment.*
 import timber.log.Timber
 import xyz.twbkg.stock.R
 import xyz.twbkg.stock.application.BaseFragment
+import xyz.twbkg.stock.data.model.db.Category
 import javax.inject.Inject
 
 class AddEditCategoryFragment : BaseFragment(),
         AddEditCategoryContract.View {
     @Inject
     lateinit var presenter: AddEditCategoryPresenter
+
+    private var category: Category? = null
 
     override fun showEmptyError() {
         Toast.makeText(context, R.string.please_input_your_name, Toast.LENGTH_SHORT).show()
@@ -31,6 +34,28 @@ class AddEditCategoryFragment : BaseFragment(),
         Toast.makeText(context, string, Toast.LENGTH_SHORT).show()
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (arguments != null) {
+            arguments?.let { restoreArgument(it) }
+        } else {
+            if (savedInstanceState != null) {
+                restoreSavedInstanceState(savedInstanceState)
+            }
+        }
+    }
+
+    private fun restoreSavedInstanceState(savedInstanceState: Bundle) {
+        category = savedInstanceState.getParcelable(ARG_CATEGORY)
+    }
+
+    private fun restoreArgument(arguments: Bundle) {
+        arguments?.let {
+            category = it.getParcelable("category")
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
         return inflater.inflate(R.layout.add_edit_category_fragment, container, false)
@@ -40,6 +65,20 @@ class AddEditCategoryFragment : BaseFragment(),
         super.onActivityCreated(savedInstanceState)
         addListener()
         updateTitle("${getString(R.string.title_add)} ${getString(R.string.title_category)}")
+
+        category?.let {
+            setIdToPresenter(it.id)
+            setModelToView(it.name, it.description)
+        }
+    }
+
+    private fun setIdToPresenter(id: Int) {
+        presenter.setId(id)
+    }
+
+    private fun setModelToView(name: String, description: String) {
+        input_name_edt?.apply { setText(name) }
+        input_description_edt?.apply { setText(description) }
     }
 
     private fun validateField(): Boolean {
@@ -77,7 +116,14 @@ class AddEditCategoryFragment : BaseFragment(),
     }
 
     companion object {
+        const val ARG_CATEGORY = "catgory"
         fun newInstance() = AddEditCategoryFragment()
+        fun newInstance(category: Category): AddEditCategoryFragment {
+            return AddEditCategoryFragment().apply {
+                arguments = Bundle().apply {
+                    putParcelable(ARG_CATEGORY, category)
+                }
+            }
+        }
     }
-
 }

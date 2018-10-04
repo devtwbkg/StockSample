@@ -28,13 +28,8 @@ class MainFragment : BaseFragment() {
     }
 
     @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-
-    @Inject
     lateinit var appScheduler: Scheduler
 
-    private lateinit var viewModel: MainViewModel
 
     private var errorSnackBar: Snackbar? = null
 
@@ -53,33 +48,6 @@ class MainFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this, viewModelFactory)
-                .get(MainViewModel::class.java)
 
-        viewModel.loadContent()
-
-        viewModel.contents.observe(this, Observer { response ->
-            response?.let {
-                message?.apply { text = it.toString() }
-            }
-        })
-        viewModel.errorMessage.observe(this, Observer { errorMessage ->
-            if (errorMessage != null) {
-                showError(errorMessage)
-            } else {
-                hideError()
-            }
-        })
     }
-
-    private fun showError(@StringRes errorMessage: Int) {
-        errorSnackBar = Snackbar.make(main, errorMessage, Snackbar.LENGTH_INDEFINITE)
-        errorSnackBar?.setAction(R.string.retry, viewModel.errorClickListener)
-        errorSnackBar?.show()
-    }
-
-    private fun hideError() {
-        errorSnackBar?.dismiss()
-    }
-
 }

@@ -9,6 +9,7 @@ import xyz.twbkg.stock.MainApp
 import xyz.twbkg.stock.di.builder.ActivityBinder
 import xyz.twbkg.stock.di.module.AppModule
 import xyz.twbkg.stock.di.module.NetworkModule
+import xyz.twbkg.stock.di.module.RepositoryModule
 import javax.inject.Singleton
 
 

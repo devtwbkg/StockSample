@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment
 import android.support.v7.widget.DividerItemDecoration
 import android.view.*
 import android.widget.LinearLayout
+import android.widget.Toast
 import io.reactivex.disposables.CompositeDisposable
 import kotlinx.android.synthetic.main.category_fragment.*
 import timber.log.Timber
@@ -24,7 +25,6 @@ import javax.inject.Inject
 
 class CategoryFragment : BaseFragment(),
         CategoryContract.View {
-
 
     companion object {
         fun newInstance() = CategoryFragment()
@@ -61,7 +61,7 @@ class CategoryFragment : BaseFragment(),
         categoryListAdapter.addCallback(object : AdapterListAdapterCallback {
             override fun onItemSelected(position: Int) {
                 Timber.d("item selected $position")
-                presenter.findAll()
+                presenter.findItem(position)
             }
         })
         category_list?.apply {
@@ -81,6 +81,19 @@ class CategoryFragment : BaseFragment(),
         }
     }
 
+    override fun navigationToAddEditCategory(item: Category) {
+        Intent(context, AddEditCategoryActivity::class.java).apply {
+            putExtra("item", item)
+        }.also { startActivity(it) }
+    }
+
+    override fun showErrorMessage(message: Int) {
+        Toast.makeText(context,
+                message,
+                Toast.LENGTH_SHORT)
+                .show()
+    }
+
     override fun showLoading() {
         progressbar?.visibility = View.VISIBLE
         swipeRefreshLayout?.isRefreshing = true
@@ -88,7 +101,7 @@ class CategoryFragment : BaseFragment(),
 
     override fun hideLoading() {
         progressbar?.visibility = View.GONE
-         swipeRefreshLayout?.isRefreshing = false
+        swipeRefreshLayout?.isRefreshing = false
     }
 
     override fun showResult(items: List<Category>) {

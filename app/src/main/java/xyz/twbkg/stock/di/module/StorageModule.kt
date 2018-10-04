@@ -9,6 +9,7 @@ import dagger.Module
 import dagger.Provides
 import xyz.twbkg.stock.data.source.database.AppDataBase
 import xyz.twbkg.stock.data.source.local.category.CategoryDao
+import xyz.twbkg.stock.data.source.local.unit.UnitDao
 import javax.inject.Singleton
 
 @Module
@@ -28,7 +29,9 @@ class StorageModule {
 
     @Singleton
     @Provides
-    fun provideCategoryDao(db: AppDataBase): CategoryDao {
-        return db.categoryDao()
-    }
+    fun provideCategoryDao(db: AppDataBase): CategoryDao = db.categoryDao()
+
+    @Singleton
+    @Provides
+    fun provideUnitDao(db: AppDataBase): UnitDao = db.unitDao()
 }

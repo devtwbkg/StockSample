@@ -1,5 +1,6 @@
 package xyz.twbkg.stock.ui.category.addedit
 
+import android.os.Bundle
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -19,6 +20,16 @@ class AddEditCategoryPresenter @Inject constructor(
     private var categoryId: Int = 0
     private var disposable = CompositeDisposable()
     private lateinit var mSubscription: Subscription
+
+    override fun refreshData() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun restoreSavedInstanceState(savedInstanceState: Bundle) {
+    }
+
+    override fun restoreArgument(arguments: Bundle) {
+    }
 
     override fun save(title: String, description: String) {
 
@@ -88,6 +99,9 @@ class AddEditCategoryPresenter @Inject constructor(
 //        return mTasksRepository.saveTask(newTask)
 //    }
 
+    fun setId(id: Int) {
+        this.categoryId = id
+    }
 
     private fun isNewCategory(): Boolean {
         return categoryId == 0

@@ -8,7 +8,7 @@ import xyz.twbkg.stock.networking.AppScheduler
 import xyz.twbkg.stock.networking.Scheduler
 import javax.inject.Singleton
 
-@Module(includes = [ViewModelModule::class, UtilsModule::class, ContractModule::class, ServiceModule::class, StorageModule::class])
+@Module(includes = [RepositoryModule::class, UtilsModule::class, ServiceModule::class, StorageModule::class])
 class AppModule {
     @Singleton
     @Provides
