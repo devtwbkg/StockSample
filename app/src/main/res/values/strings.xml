@@ -27,6 +27,7 @@
     <string name="title_category">Category</string>
 
 
+    <string name="success_action">successfully</string>
     <string name="success_insert_action">create successfully</string>
     <string name="success_update_action">update successfully</string>
     <string name="submit_action">Submit</string>

@@ -27,7 +27,8 @@
     <string name="category_hint_name">ชื่อ</string>
     <string name="category_hint_description">รายละเอียด</string>
 
-    <string name="new_unit">New unitMeasure</string>
+    <string name="new_unit">เพิ่มหน่วยนับ</string>
+    <string name="success_action">ดำเนินการสำเร็จ</string>
     <string name="data_must_not_empty">กรุณาป้อนข้อมูลให้ครบ</string>
     <string name="action_fail">ดำเนินการล้มเหลว</string>
     <string name="result_not_found">ไม่พบข้อมูล</string>

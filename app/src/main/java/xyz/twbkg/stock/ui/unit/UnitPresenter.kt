@@ -160,7 +160,7 @@ class UnitPresenter @Inject constructor(
     }
 
     private fun showSuccessMessage() {
-        view.showSuccessMessage(R.string.success_insert_action)
+        view.showSuccessMessage(R.string.success_action)
     }
 
     private fun showFailMessage(throwable: Throwable) {
