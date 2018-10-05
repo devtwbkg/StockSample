@@ -21,7 +21,7 @@ class UnitRepository @Inject constructor(
     /**
      * This variable has public visibility so it can be accessed from tests.
      */
-    lateinit var cachedItem: LinkedHashMap<Int, UnitMeasure>
+    private lateinit var cachedItem: LinkedHashMap<Int, UnitMeasure>
 
     /**
      * Marks the cache as invalid, to force an update the next time data is requested. This variable

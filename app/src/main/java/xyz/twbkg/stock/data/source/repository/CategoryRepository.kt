@@ -27,7 +27,7 @@ class CategoryRepository @Inject constructor(
     /**
      * This variable has public visibility so it can be accessed from tests.
      */
-    lateinit var cachedItem: LinkedHashMap<Int, Category>
+    private lateinit var cachedItem: LinkedHashMap<Int, Category>
 
     /**
      * Marks the cache as invalid, to force an update the next time data is requested. This variable
