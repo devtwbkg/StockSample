@@ -1,19 +1,18 @@
 package xyz.twbkg.stock.ui.category.list
 
 import android.os.Bundle
-import android.view.View
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import xyz.twbkg.stock.R
 import xyz.twbkg.stock.data.model.db.Category
-import xyz.twbkg.stock.data.source.repository.CategoryRepo
+import xyz.twbkg.stock.data.source.repository.CategoryRepository
 import javax.inject.Inject
 
 class CategoryPresenter @Inject constructor(
         var view: CategoryContract.View,
-        var categoryRepo: CategoryRepo
+        var categoryRepository: CategoryRepository
 ) : CategoryContract.Presenter {
 
     private var disposables = CompositeDisposable()
@@ -49,10 +48,10 @@ class CategoryPresenter @Inject constructor(
 
     override fun findAll() {
         if (isForceLoading) {
-            categoryRepo.refreshData()
+            categoryRepository.refreshData()
         }
 
-        val disposable = categoryRepo
+        val disposable = categoryRepository
                 .findAll()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

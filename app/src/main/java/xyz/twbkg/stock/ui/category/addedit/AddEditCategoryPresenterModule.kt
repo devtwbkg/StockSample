@@ -2,7 +2,7 @@ package xyz.twbkg.stock.ui.category.addedit
 
 import dagger.Module
 import dagger.Provides
-import xyz.twbkg.stock.data.source.repository.CategoryRepo
+import xyz.twbkg.stock.data.source.repository.CategoryRepository
 
 @Module
 class AddEditCategoryPresenterModule {
@@ -15,8 +15,8 @@ class AddEditCategoryPresenterModule {
     @Provides
     fun providePresenter(
             view: AddEditCategoryContract.View,
-            categoryRepo: CategoryRepo
+            categoryRepository: CategoryRepository
     ): AddEditCategoryContract.Presenter =
-            AddEditCategoryPresenter(view, categoryRepo)
+            AddEditCategoryPresenter(view, categoryRepository)
 
 }

@@ -18,7 +18,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CategoryRepo @Inject constructor(
+class CategoryRepository @Inject constructor(
         @Remote val remoteDataSource: CategoryDataSource,
         @Local val localDataSource: CategoryDataSource
 ) : CategoryDataSource {
@@ -27,7 +27,7 @@ class CategoryRepo @Inject constructor(
     /**
      * This variable has public visibility so it can be accessed from tests.
      */
-    var cachedItem: LinkedHashMap<Int, Category> = LinkedHashMap()
+    lateinit var cachedItem: LinkedHashMap<Int, Category>
 
     /**
      * Marks the cache as invalid, to force an update the next time data is requested. This variable
@@ -38,8 +38,10 @@ class CategoryRepo @Inject constructor(
 
     override fun findAll(): Flowable<List<Category>> {
         // Respond immediately with cache if available and not dirty
-        if (cachedItem.isNotEmpty() && !cacheIsDirty) {
+        if (::cachedItem.isInitialized && !cacheIsDirty) {
             return Flowable.fromIterable(cachedItem.values).toList().toFlowable()
+        } else if (!::cachedItem.isInitialized) {
+            cachedItem = LinkedHashMap()
         }
 
         val remoteTasks = getAndSaveRemoteTasks()

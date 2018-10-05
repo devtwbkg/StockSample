@@ -13,23 +13,21 @@ class CategoryLocalDataSource @Inject constructor(
         var dao: CategoryDao
 ) : CategoryDataSource {
 
-
-    override fun findAll(): Flowable<List<Category>> = dao.findAll()
-
-    override fun findLastId(): Flowable<Category> {
-        return Flowable.fromCallable { dao.findLastId() }
+    override fun findAll(): Flowable<List<Category>> = Flowable.fromCallable {
+        dao.findAll()
     }
 
-    override fun findById(id: Int): Flowable<Category> {
-        return Flowable.fromCallable { dao.findById(id) }
+    override fun findLastId(): Flowable<Category> = Flowable.fromCallable {
+        dao.findLastId()
     }
 
-    override fun save(model: Category): Completable {
-        return Completable.fromAction {
-            dao.insert(model)
-        }
+    override fun findById(id: Int): Flowable<Category> = Flowable.fromCallable {
+        dao.findById(id)
     }
 
+    override fun save(model: Category): Completable = Completable.fromAction {
+        dao.insert(model)
+    }
 
     override fun saveAll(model: List<Category>): Completable = Completable.fromAction {
         dao.insertAll(model)

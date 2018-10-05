@@ -11,6 +11,7 @@ import javax.inject.Singleton
 class UnitRemoteDataSource @Inject constructor(
         var service: UnitService
 ) : UnitDataSource {
+
     override fun findLastId(): Flowable<UnitMeasure> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
@@ -32,7 +33,6 @@ class UnitRemoteDataSource @Inject constructor(
     override fun update(model: UnitMeasure): Completable = Completable.fromAction {
         service.update(model)
     }
-
 
     override fun refreshData() {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

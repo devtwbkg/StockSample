@@ -8,13 +8,13 @@ import org.reactivestreams.Subscription
 import timber.log.Timber
 import xyz.twbkg.stock.R
 import xyz.twbkg.stock.data.model.db.Category
-import xyz.twbkg.stock.data.source.repository.CategoryRepo
+import xyz.twbkg.stock.data.source.repository.CategoryRepository
 import javax.inject.Inject
 
 
 class AddEditCategoryPresenter @Inject constructor(
         var view: AddEditCategoryContract.View,
-        var categoryRepo: CategoryRepo
+        var categoryRepository: CategoryRepository
 ) : AddEditCategoryContract.Presenter {
 
     private var categoryId: Int = 0
@@ -41,7 +41,7 @@ class AddEditCategoryPresenter @Inject constructor(
             category.apply {
                 id = categoryId
             }.also {
-                categoryRepo.update(it)
+                categoryRepository.update(it)
             }
         }
     }
@@ -54,7 +54,7 @@ class AddEditCategoryPresenter @Inject constructor(
     private fun createCategory(category: Category) {
         Timber.i("category $category")
         disposable.add(
-                categoryRepo.save(category)
+                categoryRepository.save(category)
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe(this::showSuccessMessage, this::showFailMessage)

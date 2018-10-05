@@ -13,23 +13,21 @@ class UnitLocalDataSource @Inject constructor(
         var dao: UnitDao
 ) : UnitDataSource {
 
-
-    override fun findAll(): Flowable<List<UnitMeasure>> = dao.findAll()
-
-    override fun findLastId(): Flowable<UnitMeasure> {
-        return Flowable.fromCallable { dao.findLastId() }
+    override fun findAll(): Flowable<List<UnitMeasure>> = Flowable.fromCallable {
+        dao.findAll()
     }
 
-    override fun findById(id: Int): Flowable<UnitMeasure> {
-        return Flowable.fromCallable { dao.findById(id) }
+    override fun findLastId(): Flowable<UnitMeasure> = Flowable.fromCallable {
+        dao.findLastId()
     }
 
-    override fun save(model: UnitMeasure): Completable {
-        return Completable.fromAction {
-            dao.insert(model)
-        }
+    override fun findById(id: Int): Flowable<UnitMeasure> = Flowable.fromCallable {
+        dao.findById(id)
     }
 
+    override fun save(model: UnitMeasure): Completable = Completable.fromAction {
+        dao.insert(model)
+    }
 
     override fun saveAll(model: List<UnitMeasure>): Completable = Completable.fromAction {
         dao.insertAll(model)

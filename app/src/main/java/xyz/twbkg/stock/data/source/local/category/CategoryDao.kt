@@ -12,7 +12,7 @@ interface CategoryDao {
      * @return all unarchived category (items).
      */
     @Query("SELECT * FROM category")
-    fun findAll(): Flowable<List<Category>>
+    fun findAll(): List<Category>
 
     @Query("SELECT * FROM category WHERE id = (SELECT max(id) FROM CATEGORY)")
     fun findLastId(): Category

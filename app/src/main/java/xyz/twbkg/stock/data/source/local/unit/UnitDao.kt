@@ -12,7 +12,7 @@ interface UnitDao {
      * @return all unarchived unit (items).
      */
     @Query("SELECT * FROM unit")
-    fun findAll(): Flowable<List<UnitMeasure>>
+    fun findAll(): List<UnitMeasure>
 
     @Query("SELECT * FROM unit WHERE id = (SELECT max(id) FROM unit)")
     fun findLastId(): UnitMeasure

@@ -103,7 +103,7 @@ class UnitPresenter @Inject constructor(
 
     override fun save(name: String, description: String) {
 
-        var unit = UnitMeasure(name, description)
+        val unit = UnitMeasure(name, description)
         Timber.d("unit $unit")
         if (isNewItem()) {
             createModel(unit)
