@@ -10,14 +10,24 @@ import xyz.twbkg.stock.data.model.response.CategoryResponse
 interface UnitService {
 
     @GET("/unit")
-    fun getUnit(): Flowable<List<UnitMeasure>>
+    fun getAll(): Flowable<List<UnitMeasure>>
 
-    @GET("/unit")
-    fun getCategoryV2(): Observable<CategoryResponse>
+    @GET("/unit/{id}")
+    fun getById(@Path("id") id: Int): Flowable<UnitMeasure>
 
-    @POST("unit/new")
+    @POST("/new")
     fun save(@Body unit: UnitMeasure): Completable
 
     @PUT("/update")
     fun update(@Body unit: UnitMeasure): Completable
+
+    @PUT("/update")
+    fun updateAll(@Body units: List<UnitMeasure>): Completable
+
+    @DELETE("/delete")
+    fun delete(@Path("id") id: Int): Completable
+
+    @DELETE("/delete")
+    fun deleteAll(): Completable
+
 }

@@ -1,6 +1,5 @@
 package xyz.twbkg.stock.data.source.repository
 
-import android.util.Log
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import timber.log.Timber
@@ -8,9 +7,11 @@ import xyz.twbkg.stock.data.model.db.UnitMeasure
 import xyz.twbkg.stock.data.source.repository.category.UnitDataSource
 import xyz.twbkg.stock.data.source.scope.Local
 import xyz.twbkg.stock.data.source.scope.Remote
-import java.util.*
 import javax.inject.Inject
 import javax.inject.Singleton
+import android.support.annotation.NonNull
+import kotlin.collections.LinkedHashMap
+
 
 @Singleton
 class UnitRepository @Inject constructor(
@@ -55,14 +56,43 @@ class UnitRepository @Inject constructor(
 
     override fun findLastId(): Flowable<UnitMeasure> = localDataSource.findLastId()
 
-    override fun findById(id: Int): Flowable<UnitMeasure> = localDataSource.findById(id)
+    override fun findById(id: Int): Flowable<UnitMeasure> {
+        val cachedUnit = getWithId(id)
+
+        // Respond immediately with cache if available
+        if (cachedUnit != null) {
+            return Flowable.just(cachedUnit)
+        }
+
+        // Load from server/persisted if needed.
+
+        //Do in memory cache update to keep the app UI up to date
+        if (!::cachedItem.isInitialized || cachedItem == null) {
+            cachedItem = LinkedHashMap()
+        }
+
+        val local = getWithIdFromLocalRepository(id)
+        val remote = remoteDataSource
+                .findById(id)
+                .doOnNext { item ->
+                    localDataSource.save(item)
+                    cachedItem.put(item.id, item)
+                }
+
+        return Flowable.concat(local, remote)
+                .firstElement()
+                .toFlowable()
+    }
 
     override fun save(model: UnitMeasure): Completable {
         return remoteDataSource.save(model)
                 .andThen(localDataSource.save(model))
     }
 
-    override fun saveAll(model: List<UnitMeasure>): Completable = localDataSource.saveAll(model)
+    override fun saveAll(models: List<UnitMeasure>): Completable {
+        return remoteDataSource.saveAll(models)
+                .andThen(localDataSource.saveAll(models))
+    }
 
     override fun update(model: UnitMeasure): Completable {
         return remoteDataSource.update(model)
@@ -73,9 +103,15 @@ class UnitRepository @Inject constructor(
         cacheIsDirty = true
     }
 
-    override fun deleteAll(): Completable = localDataSource.deleteAll()
+    override fun deleteAll(): Completable {
+        return remoteDataSource.deleteAll()
+                .andThen(localDataSource.deleteAll())
+    }
 
-    override fun delete(id: Int): Completable = localDataSource.delete(id)
+    override fun delete(id: Int): Completable {
+        return remoteDataSource.delete(id)
+                .andThen(localDataSource.delete(id))
+    }
 
 
     private fun getAndCacheLocalTasks(): Flowable<List<UnitMeasure>> {
@@ -105,13 +141,24 @@ class UnitRepository @Inject constructor(
                             .toList()
                             .toFlowable()
                 }
-//                .doOnNext { items ->
-//                    Timber.i("task result $items")
-//                    localDataSource.saveTasks(items)
-//                    for (item in items) {
-//                        cachedItem.put(item.id, item)
-//                    }
-//                }
                 .doOnComplete { cacheIsDirty = false }
+    }
+
+    private fun getWithId(id: Int): UnitMeasure? {
+        checkNotNull(id)
+        return if (!::cachedItem.isInitialized || cachedItem.isEmpty()) {
+            null
+        } else {
+            cachedItem[id]
+        }
+    }
+
+    private fun getWithIdFromLocalRepository(@NonNull id: Int): Flowable<UnitMeasure> {
+        return localDataSource
+                .findById(id)
+                .doOnNext { taskOptional ->
+                    cachedItem.put(id, taskOptional)
+                }
+                .firstElement().toFlowable()
     }
 }

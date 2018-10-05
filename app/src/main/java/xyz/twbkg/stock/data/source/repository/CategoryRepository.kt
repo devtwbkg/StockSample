@@ -46,25 +46,50 @@ class CategoryRepository @Inject constructor(
 
         val remoteTasks = getAndSaveRemoteTasks()
 
-
         return if (cacheIsDirty) {
             remoteTasks
         } else {
             // Query the local storage if available. If not, query the network.
             val localTasks = getAndCacheLocalTasks()
             Flowable.concat<List<Category>>(localTasks, remoteTasks)
-                    .filter { tasks -> !tasks.isEmpty() }
+                    .filter { tasks ->
+                        !tasks.isEmpty()
+                    }
                     .firstOrError()
                     .toFlowable()
         }
     }
 
     override fun findLastId(): Flowable<Category> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return localDataSource.findLastId()
     }
 
     override fun findById(id: Int): Flowable<Category> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val cachedUnit = getWithId(id)
+
+        // Respond immediately with cache if available
+        if (cachedUnit != null) {
+            return Flowable.just(cachedUnit)
+        }
+
+        // Load from server/persisted if needed.
+
+        //Do in memory cache update to keep the app UI up to date
+        if (!::cachedItem.isInitialized || cachedItem == null) {
+            cachedItem = LinkedHashMap()
+        }
+
+        val local = getWithIdFromLocalRepository(id)
+        val remote = remoteDataSource
+                .findById(id)
+                .doOnNext { item ->
+                    localDataSource.save(item)
+                    cachedItem.put(item.id, item)
+                }
+
+        return Flowable.concat(local, remote)
+                .firstElement()
+                .toFlowable()
     }
 
     override fun save(model: Category): Completable {
@@ -72,8 +97,9 @@ class CategoryRepository @Inject constructor(
                 .andThen(localDataSource.save(model))
     }
 
-    override fun saveAll(model: List<Category>): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun saveAll(models: List<Category>): Completable {
+        return remoteDataSource.saveAll(models)
+                .andThen(localDataSource.saveAll(models))
     }
 
     override fun update(model: Category): Completable {
@@ -86,11 +112,13 @@ class CategoryRepository @Inject constructor(
     }
 
     override fun deleteAll(): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return remoteDataSource.deleteAll()
+                .andThen(localDataSource.deleteAll())
     }
 
     override fun delete(id: Int): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return remoteDataSource.delete(id)
+                .andThen(localDataSource.delete(id))
     }
 
 
@@ -120,13 +148,24 @@ class CategoryRepository @Inject constructor(
                             .toList()
                             .toFlowable()
                 }
-//                .doOnNext { items ->
-//                    Timber.i("task result $items")
-//                    localDataSource.saveTasks(items)
-//                    for (item in items) {
-//                        cachedItem.put(item.id, item)
-//                    }
-//                }
                 .doOnComplete { cacheIsDirty = false }
+    }
+
+    private fun getWithId(id: Int): Category? {
+        checkNotNull(id)
+        return if (!::cachedItem.isInitialized || cachedItem.isEmpty()) {
+            null
+        } else {
+            cachedItem[id]
+        }
+    }
+
+    private fun getWithIdFromLocalRepository(id: Int): Flowable<Category> {
+        return localDataSource
+                .findById(id)
+                .doOnNext { taskOptional ->
+                    cachedItem.put(id, taskOptional)
+                }
+                .firstElement().toFlowable()
     }
 }

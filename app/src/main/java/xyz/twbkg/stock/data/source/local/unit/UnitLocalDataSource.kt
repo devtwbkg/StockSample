@@ -29,8 +29,8 @@ class UnitLocalDataSource @Inject constructor(
         dao.insert(model)
     }
 
-    override fun saveAll(model: List<UnitMeasure>): Completable = Completable.fromAction {
-        dao.insertAll(model)
+    override fun saveAll(models: List<UnitMeasure>): Completable = Completable.fromAction {
+        dao.insertAll(models)
     }
 
     override fun update(model: UnitMeasure): Completable = Completable.fromAction {

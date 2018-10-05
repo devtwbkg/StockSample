@@ -16,18 +16,16 @@ class UnitRemoteDataSource @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun findAll(): Flowable<List<UnitMeasure>> = service.getUnit()
+    override fun findAll(): Flowable<List<UnitMeasure>> = service.getAll()
 
-    override fun findById(id: Int): Flowable<UnitMeasure> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+    override fun findById(id: Int): Flowable<UnitMeasure> = service.getById(id)
 
     override fun save(model: UnitMeasure): Completable = Completable.fromAction {
         service.save(model)
     }
 
-    override fun saveAll(model: List<UnitMeasure>): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun saveAll(models: List<UnitMeasure>): Completable = Completable.fromAction {
+        service.updateAll(models)
     }
 
     override fun update(model: UnitMeasure): Completable = Completable.fromAction {
@@ -38,11 +36,11 @@ class UnitRemoteDataSource @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun deleteAll(): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun deleteAll(): Completable = Completable.fromAction {
+        service.deleteAll()
     }
 
-    override fun delete(id: Int): Completable {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    override fun delete(id: Int): Completable = Completable.fromAction {
+        service.delete(id)
     }
 }

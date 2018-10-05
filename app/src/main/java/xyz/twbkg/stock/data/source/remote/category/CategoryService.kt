@@ -2,26 +2,29 @@ package xyz.twbkg.stock.data.source.remote.category
 
 import io.reactivex.Completable
 import io.reactivex.Flowable
-import io.reactivex.Observable
-import io.reactivex.Single
 import retrofit2.http.*
 import xyz.twbkg.stock.data.model.db.Category
-import xyz.twbkg.stock.data.model.response.CategoryResponse
 
 interface CategoryService {
-    @GET("/category")
-    fun getCategory(): Flowable<CategoryResponse>
 
     @GET("/category")
-    fun getCategories(): Flowable<List<Category>>
+    fun getAll(): Flowable<List<Category>>
 
-    @GET("/category")
-    fun getCategoryV2(): Observable<CategoryResponse>
+    @GET("/category/{id}")
+    fun getById(@Path("id") id: Int): Flowable<Category>
 
-    @POST("category/new")
-    fun save(@Body category: Category): Completable
+    @POST("/new")
+    fun save(@Body unit: Category): Completable
 
     @PUT("/update")
-    @Multipart
-    fun update(@Body category: Category): Completable
+    fun update(@Body unit: Category): Completable
+
+    @PUT("/update")
+    fun updateAll(@Body units: List<Category>): Completable
+
+    @DELETE("/delete")
+    fun delete(@Path("id") id: Int): Completable
+
+    @DELETE("/delete")
+    fun deleteAll(): Completable
 }
