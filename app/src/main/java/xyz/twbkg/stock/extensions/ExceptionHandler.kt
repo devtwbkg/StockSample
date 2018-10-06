@@ -20,7 +20,7 @@ fun Throwable.handle(): Int {
                 R.string.error_connection_timeout
             }
             is ConnectException -> {
-                R.string.error_data_or_wifi_is_not_avariable
+                R.string.error_data_or_wifi_is_not_available
             }
             else -> {
                 R.string.unknown_error

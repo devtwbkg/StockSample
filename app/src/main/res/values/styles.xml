@@ -148,6 +148,15 @@
         <item name="android:background">@drawable/selector_cancel_button</item>
     </style>
 
+    <style name="AppTheme.Button.Submit.Stroke">
+        <item name="android:background">@drawable/selector_submit_stroke_button</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AppTheme.Button.Cancel.Stroke">
+        <item name="android:background">@drawable/selector_cancel_stroke_button</item>
+    </style>
+
     <style name="AppTheme.Item">
         <item name="android:background">@color/white</item>
     </style>

@@ -95,7 +95,7 @@ internal constructor() {
     fun fetFromNetwork() = createCall()
             .subscribeOn(Schedulers.io())
             .doOnNext { apiResponse -> saveCallResult(apiResponse) }
-            .flatMap<ApiResource<ResultType>> { apiResponse -> loadFromDb().toObservable().map<ApiResource<ResultType>> { data -> ApiResource.success(data) } }
+            .flatMap<ApiResource<ResultType>> { _ -> loadFromDb().toObservable().map<ApiResource<ResultType>> { data -> ApiResource.success(data) } }
             .doOnError { t -> onFetchFailed() }
             .onErrorResumeNext { t: Throwable ->
                 loadFromDb()

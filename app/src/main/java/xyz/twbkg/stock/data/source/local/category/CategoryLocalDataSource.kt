@@ -29,8 +29,8 @@ class CategoryLocalDataSource @Inject constructor(
         dao.insert(model)
     }
 
-    override fun saveAll(model: List<Category>): Completable = Completable.fromAction {
-        dao.insertAll(model)
+    override fun saveAll(models: List<Category>): Completable = Completable.fromAction {
+        dao.insertAll(models)
     }
 
     override fun update(model: Category): Completable = Completable.fromAction {

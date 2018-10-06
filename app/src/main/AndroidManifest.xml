@@ -35,7 +35,7 @@
         <activity
             android:name=".ui.authen.AuthenActivity"
             android:label="@string/title_activity_authen"
-            android:windowSoftInputMode="stateVisible|adjustResize">
+            android:windowSoftInputMode="adjustResize">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
