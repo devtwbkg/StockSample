@@ -11,7 +11,6 @@ import android.widget.TextView
 import kotlinx.android.synthetic.main.unit_dialog_fr.*
 import xyz.twbkg.stock.R
 import xyz.twbkg.stock.application.BaseDialogFragment
-import xyz.twbkg.stock.data.model.db.UnitMeasure
 
 
 class UpdateDialogFragment : BaseDialogFragment(), TextView.OnEditorActionListener {
@@ -69,10 +68,10 @@ class UpdateDialogFragment : BaseDialogFragment(), TextView.OnEditorActionListen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dialog_title_tv?.apply { text = "${getString(R.string.title_edit)}: ${name}" }
-        input_name_edt?.apply {
+        input_username_or_email_edt?.apply {
             setText(name)
         }
-        input_description_edt?.apply {
+        input_password_edt?.apply {
             setText(description)
             setOnEditorActionListener(this@UpdateDialogFragment)
         }
@@ -97,11 +96,11 @@ class UpdateDialogFragment : BaseDialogFragment(), TextView.OnEditorActionListen
     }
 
     private fun updateUnit() {
-        input_name_edt?.text?.let { input ->
+        input_username_or_email_edt?.text?.let { input ->
             name = input.toString()
 
         }
-        input_description_edt?.text?.let { input ->
+        input_password_edt?.text?.let { input ->
             description = input.toString()
         }
 

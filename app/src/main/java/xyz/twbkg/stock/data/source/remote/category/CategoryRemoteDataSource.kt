@@ -2,14 +2,8 @@ package xyz.twbkg.stock.data.source.remote.category
 
 import io.reactivex.Completable
 import io.reactivex.Flowable
-import io.reactivex.Scheduler
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.Disposable
-import io.reactivex.schedulers.Schedulers
 import xyz.twbkg.stock.data.model.db.Category
-import xyz.twbkg.stock.data.source.local.category.CategoryDao
-import xyz.twbkg.stock.data.source.repository.category.CategoryDataSource
-import java.util.*
+import xyz.twbkg.stock.data.source.repository.CategoryDataSource
 import javax.inject.Inject
 import javax.inject.Singleton
 

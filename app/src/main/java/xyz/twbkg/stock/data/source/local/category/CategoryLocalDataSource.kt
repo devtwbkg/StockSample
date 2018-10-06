@@ -3,7 +3,7 @@ package xyz.twbkg.stock.data.source.local.category
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import xyz.twbkg.stock.data.model.db.Category
-import xyz.twbkg.stock.data.source.repository.category.CategoryDataSource
+import xyz.twbkg.stock.data.source.repository.CategoryDataSource
 import javax.inject.Inject
 import javax.inject.Singleton
 

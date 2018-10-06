@@ -8,7 +8,7 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import xyz.twbkg.stock.R
 import xyz.twbkg.stock.data.model.db.UnitMeasure
-import xyz.twbkg.stock.data.source.repository.UnitRepository
+import xyz.twbkg.stock.data.source.repository.impl.UnitRepository
 import javax.inject.Inject
 
 class UnitPresenter @Inject constructor(

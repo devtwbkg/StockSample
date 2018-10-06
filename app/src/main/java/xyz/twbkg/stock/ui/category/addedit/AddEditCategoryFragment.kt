@@ -1,7 +1,6 @@
 package xyz.twbkg.stock.ui.category.addedit
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.view.*
 import android.widget.Toast
 import kotlinx.android.synthetic.main.add_edit_category_fragment.*
@@ -77,13 +76,13 @@ class AddEditCategoryFragment : BaseFragment(),
     }
 
     private fun setModelToView(name: String, description: String) {
-        input_name_edt?.apply { setText(name) }
-        input_description_edt?.apply { setText(description) }
+        input_username_or_email_edt?.apply { setText(name) }
+        input_password_edt?.apply { setText(description) }
     }
 
     private fun validateField(): Boolean {
-        val name = input_name_edt?.text.toString()
-        val description = input_description_edt?.text.toString()
+        val name = input_username_or_email_edt?.text.toString()
+        val description = input_password_edt?.text.toString()
         Timber.d("validateField $name description $description")
         if (name.isEmpty() || description.isEmpty()) {
             showEmptyError()
@@ -102,15 +101,15 @@ class AddEditCategoryFragment : BaseFragment(),
     }
 
     override fun clearInputBox() {
-        input_name_edt?.text?.clear()
-        input_description_edt?.text?.clear()
+        input_username_or_email_edt?.text?.clear()
+        input_password_edt?.text?.clear()
     }
 
     private fun createCategory() {
         if (validateField()) {
             presenter?.save(
-                    input_name_edt?.text.toString(),
-                    input_description_edt?.text.toString()
+                    input_username_or_email_edt?.text.toString(),
+                    input_password_edt?.text.toString()
             )
         }
     }

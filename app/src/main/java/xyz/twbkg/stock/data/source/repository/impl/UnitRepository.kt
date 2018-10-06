@@ -1,10 +1,10 @@
-package xyz.twbkg.stock.data.source.repository
+package xyz.twbkg.stock.data.source.repository.impl
 
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import timber.log.Timber
 import xyz.twbkg.stock.data.model.db.UnitMeasure
-import xyz.twbkg.stock.data.source.repository.category.UnitDataSource
+import xyz.twbkg.stock.data.source.repository.UnitDataSource
 import xyz.twbkg.stock.data.source.scope.Local
 import xyz.twbkg.stock.data.source.scope.Remote
 import javax.inject.Inject

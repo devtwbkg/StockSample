@@ -5,6 +5,11 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:name=".MainApp"
         android:allowBackup="true"
@@ -13,9 +18,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.NoActionBar">
-        <activity android:name=".ui.main.MainActivity">
-
-        </activity>
+        <activity android:name=".ui.main.MainActivity"></activity>
         <activity
             android:name=".ui.category.AddEditCategoryActivity"
             android:label="@string/title_add"
@@ -23,11 +26,17 @@
         <activity android:name=".ui.category.CategoryDetailActivity" />
         <activity
             android:name=".ui.category.CategoryActivity"
-            android:label="@string/title_category">
-        </activity>
+            android:label="@string/title_category"
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name=".ui.unit.UnitActivity"
-            android:label="@string/title_unit">
+            android:label="@string/title_unit"
+            android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name=".ui.authen.AuthenActivity"
+            android:label="@string/title_activity_authen"
+            android:windowSoftInputMode="stateVisible|adjustResize">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

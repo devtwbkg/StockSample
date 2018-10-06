@@ -42,7 +42,7 @@ class CreateDialogFragment : BaseDialogFragment(), TextView.OnEditorActionListen
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dialog_title_tv?.apply { text = "${getString(R.string.title_add)}: ${getString(R.string.title_unit)}" }
-        input_description_edt?.apply {
+        input_password_edt?.apply {
             setOnEditorActionListener(this@CreateDialogFragment)
         }
         dialog.window?.setSoftInputMode(
@@ -69,11 +69,11 @@ class CreateDialogFragment : BaseDialogFragment(), TextView.OnEditorActionListen
 
 
     private fun updateUnit() {
-        input_name_edt?.text?.let { input ->
+        input_username_or_email_edt?.text?.let { input ->
             name = input.toString()
 
         }
-        input_description_edt?.text?.let { input ->
+        input_password_edt?.text?.let { input ->
             description = input.toString()
         }
 

@@ -7,7 +7,7 @@ import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 import xyz.twbkg.stock.R
 import xyz.twbkg.stock.data.model.db.Category
-import xyz.twbkg.stock.data.source.repository.CategoryRepository
+import xyz.twbkg.stock.data.source.repository.impl.CategoryRepository
 import javax.inject.Inject
 
 class CategoryPresenter @Inject constructor(

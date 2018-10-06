@@ -2,7 +2,7 @@ package xyz.twbkg.stock.ui.category.addedit
 
 import dagger.Module
 import dagger.Provides
-import xyz.twbkg.stock.data.source.repository.CategoryRepository
+import xyz.twbkg.stock.data.source.repository.impl.CategoryRepository
 
 @Module
 class AddEditCategoryPresenterModule {

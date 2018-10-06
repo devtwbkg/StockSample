@@ -25,19 +25,19 @@
                 android:padding="16dp">
 
                 <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/input_name_edt"
+                    android:id="@+id/input_username_or_email_edt"
                     style="@style/AppTheme.EditText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:hint="@string/unit_hint_name"
-                    android:nextFocusDown="@+id/input_description_edt"
+                    android:nextFocusDown="@+id/input_password_edt"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
 
                 <android.support.v7.widget.AppCompatEditText
-                    android:id="@+id/input_description_edt"
+                    android:id="@+id/input_password_edt"
                     style="@style/AppTheme.EditText"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
                     android:imeOptions="actionDone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/input_name_edt" />
+                    app:layout_constraintTop_toBottomOf="@+id/input_username_or_email_edt" />
 
             </android.support.constraint.ConstraintLayout>
 
@@ -61,16 +61,16 @@
                     style="@style/AppTheme.Button.Cancel"
                     android:layout_marginEnd="8dp"
                     android:text="@string/cancel_action"
-                    app:layout_constraintStart_toStartOf="@+id/input_description_edt"
-                    app:layout_constraintTop_toBottomOf="@+id/input_description_edt" />
+                    app:layout_constraintStart_toStartOf="@+id/input_password_edt"
+                    app:layout_constraintTop_toBottomOf="@+id/input_password_edt" />
 
                 <android.support.v7.widget.AppCompatButton
                     android:id="@+id/submit_btn"
                     style="@style/AppTheme.Button.Submit"
                     android:layout_marginStart="8dp"
                     android:text="@string/submit_action"
-                    app:layout_constraintEnd_toEndOf="@+id/input_description_edt"
-                    app:layout_constraintTop_toBottomOf="@+id/input_description_edt" />
+                    app:layout_constraintEnd_toEndOf="@+id/input_password_edt"
+                    app:layout_constraintTop_toBottomOf="@+id/input_password_edt" />
 
             </android.support.v7.widget.LinearLayoutCompat>
         </android.support.v7.widget.LinearLayoutCompat>

@@ -33,4 +33,26 @@
     <string name="action_fail">ดำเนินการล้มเหลว</string>
     <string name="result_not_found">ไม่พบข้อมูล</string>
     <!-- end unitMeasure -->
+
+    <string name="title_activity_authen">ลงทะเบียน</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">อีเมล</string>
+    <string name="prompt_password">รหัสผ่าน</string>
+    <string name="action_sign_in">เข้าระบบ หรือ ลงทะเบียน</string>
+    <string name="action_sign_in_short">เข้าระบบ</string>
+    <string name="error_invalid_email_or_password">กรุณากรอกอีเมลหรือชื่อเข้าระบบ</string>
+    <string name="error_invalid_password">กรุณากรอกรหัสผ่าน</string>
+    <string name="error_incorrect_password">รหัสผ่านไม่ถูกต้อง</string>
+    <string name="error_field_required">กรุณากรอกข้อมูลนี้ด้วย</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="password">รหัสผ่าน</string>
+    <string name="username_or_email">ชื่อเข้าระบบหรืออีเมล</string>
+    <string name="sign_in">เข้าระบบ</string>
+    <string name="sig_up">ลงทะเบียน</string>
+    <string name="please_wait">กรุณารอสักครู่</string>
+    <string name="error_connection_timeout">หมดเวลาการเชื่อมต่อ</string>
+    <string name="unknown_error">เกิดข้อผิดพลาด</string>
+    <string name="error_data_or_wifi_is_not_available">ไม่พบการเชือมต่อ ตรวจสอบให้แน่ใจว่าเปิด Wi-Fi หรือข้อมูลมือถือแล้วลองอีกครั้ง</string>
 </resources>

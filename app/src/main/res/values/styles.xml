@@ -6,14 +6,15 @@
         <!--   your app branding color for the app bar -->
         <item name="colorPrimary">@color/indigo</item>
         <!--   darker variant for the status bar and contextual app bars -->
-        <item name="colorPrimaryDark">@color/white</item>
+        <item name="colorPrimaryDark">@color/indigo_dark</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">@color/white</item>
         <!--   theme UI controls like checkboxes and text fields -->
         <item name="colorAccent">@color/colorAccent</item>
 
         <item name="actionBarStyle">@style/AppTheme.AppBarOverlay.ActionBar</item>
         <item name="toolbarStyle">@style/CustomToolBarStyle</item>
         <item name="android:fontFamily">@font/kanit_light</item>
-
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -22,6 +23,14 @@
         <item name="background">@color/white</item>
         <item name="toolbarStyle">@style/MyToolBarStyle</item>
     </style>
+
+
+    <style name="AppTheme.TransparentTheme">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
@@ -142,4 +151,5 @@
     <style name="AppTheme.Item">
         <item name="android:background">@color/white</item>
     </style>
+
 </resources>

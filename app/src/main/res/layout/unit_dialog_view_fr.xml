@@ -76,16 +76,16 @@
                 style="@style/AppTheme.Button.Cancel"
                 android:layout_marginEnd="8dp"
                 android:text="@string/cancel_action"
-                app:layout_constraintStart_toStartOf="@+id/input_description_edt"
-                app:layout_constraintTop_toBottomOf="@+id/input_description_edt" />
+                app:layout_constraintStart_toStartOf="@+id/input_password_edt"
+                app:layout_constraintTop_toBottomOf="@+id/input_password_edt" />
 
             <android.support.v7.widget.AppCompatButton
                 android:id="@+id/submit_btn"
                 style="@style/AppTheme.Button.Submit"
                 android:layout_marginStart="8dp"
                 android:text="@string/submit_action"
-                app:layout_constraintEnd_toEndOf="@+id/input_description_edt"
-                app:layout_constraintTop_toBottomOf="@+id/input_description_edt" />
+                app:layout_constraintEnd_toEndOf="@+id/input_password_edt"
+                app:layout_constraintTop_toBottomOf="@+id/input_password_edt" />
 
         </android.support.v7.widget.LinearLayoutCompat>
     </android.support.v7.widget.LinearLayoutCompat>

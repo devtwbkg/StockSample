@@ -1,4 +1,4 @@
-package xyz.twbkg.stock.data.source.repository.category
+package xyz.twbkg.stock.data.source.repository
 
 import xyz.twbkg.stock.data.model.db.UnitMeasure
 import xyz.twbkg.stock.data.source.local.common.BaseDataSource

@@ -2,7 +2,7 @@ package xyz.twbkg.stock.ui.unit.module
 
 import dagger.Module
 import dagger.Provides
-import xyz.twbkg.stock.data.source.repository.UnitRepository
+import xyz.twbkg.stock.data.source.repository.impl.UnitRepository
 import xyz.twbkg.stock.ui.unit.UnitContract
 import xyz.twbkg.stock.ui.unit.UnitFragment
 import xyz.twbkg.stock.ui.unit.UnitPresenter
@@ -19,6 +19,7 @@ class UnitPresenterModule {
     fun providePresenter(
             view: UnitContract.View,
             unitRepository: UnitRepository
-    ): UnitContract.Presenter = UnitPresenter(view, unitRepository)
+    ): UnitContract.Presenter =
+            UnitPresenter(view, unitRepository)
 
 }

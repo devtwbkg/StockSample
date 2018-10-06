@@ -7,18 +7,28 @@ import xyz.twbkg.stock.data.source.local.category.CategoryDao
 import xyz.twbkg.stock.data.source.local.category.CategoryLocalDataSource
 import xyz.twbkg.stock.data.source.local.unit.UnitDao
 import xyz.twbkg.stock.data.source.local.unit.UnitLocalDataSource
+import xyz.twbkg.stock.data.source.remote.authen.AuthenRemoteDataSource
+import xyz.twbkg.stock.data.source.remote.authen.AuthenService
 import xyz.twbkg.stock.data.source.remote.category.CategoryRemoteDataSource
 import xyz.twbkg.stock.data.source.remote.category.CategoryService
 import xyz.twbkg.stock.data.source.remote.unit.UnitRemoteDataSource
 import xyz.twbkg.stock.data.source.remote.unit.UnitService
-import xyz.twbkg.stock.data.source.repository.category.CategoryDataSource
-import xyz.twbkg.stock.data.source.repository.category.UnitDataSource
+import xyz.twbkg.stock.data.source.repository.AuthenticationDataSource
+import xyz.twbkg.stock.data.source.repository.CategoryDataSource
+import xyz.twbkg.stock.data.source.repository.UnitDataSource
 import xyz.twbkg.stock.data.source.scope.Remote
 import javax.inject.Singleton
 
 
 @Module
 class RepositoryModule {
+
+    @Singleton
+    @Provides
+    @Remote
+    fun provideAuthenticationRemoteDataSource(service: AuthenService): AuthenticationDataSource {
+        return AuthenRemoteDataSource(service)
+    }
 
     @Singleton
     @Provides
