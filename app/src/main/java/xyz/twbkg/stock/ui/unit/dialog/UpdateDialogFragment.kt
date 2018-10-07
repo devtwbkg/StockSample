@@ -39,7 +39,7 @@ class UpdateDialogFragment : BaseDialogFragment(), TextView.OnEditorActionListen
     override fun onSaveInstanceState(outState: Bundle) {
         outState?.apply {
             putString("name", name)
-            putString("description", description)
+            putString("no", description)
         }
         super.onSaveInstanceState(outState)
     }
@@ -51,7 +51,7 @@ class UpdateDialogFragment : BaseDialogFragment(), TextView.OnEditorActionListen
         }
     }
 
-    override fun restoreArguments(bundle: Bundle) {
+    override fun restoreArguments(bundle: Bundle?) {
         bundle?.let {
             name = it.getString(ARG_NAME)
             description = it.getString(ARG_DESCRIPTION)
@@ -111,7 +111,7 @@ class UpdateDialogFragment : BaseDialogFragment(), TextView.OnEditorActionListen
     companion object {
 
         private const val ARG_NAME = "name"
-        private const val ARG_DESCRIPTION = "description"
+        private const val ARG_DESCRIPTION = "no"
 
         fun newInstance(name: String, description: String): UpdateDialogFragment {
             val frag = UpdateDialogFragment()

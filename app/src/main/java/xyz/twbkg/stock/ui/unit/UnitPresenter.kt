@@ -1,20 +1,31 @@
 package xyz.twbkg.stock.ui.unit
 
+import android.net.ConnectivityManager
 import android.os.Bundle
+import com.jakewharton.retrofit2.adapter.rxjava2.HttpException
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
+import org.reactivestreams.Subscription
 import timber.log.Timber
 import xyz.twbkg.stock.R
 import xyz.twbkg.stock.data.model.db.UnitMeasure
+import xyz.twbkg.stock.data.model.request.UnitRequest
+import xyz.twbkg.stock.data.model.response.BaseResponse
 import xyz.twbkg.stock.data.source.repository.impl.UnitRepository
+import xyz.twbkg.stock.util.NetworkUtils
+import java.net.ConnectException
 import javax.inject.Inject
+
 
 class UnitPresenter @Inject constructor(
         val view: UnitContract.View,
-        val unitRepository: UnitRepository
+        private val unitRepository: UnitRepository
 ) : UnitContract.Presenter {
+
+    @Inject
+    lateinit var networkUtils: NetworkUtils
 
     private val disposable = CompositeDisposable()
     private lateinit var subscription: Disposable
@@ -81,6 +92,7 @@ class UnitPresenter @Inject constructor(
         isForceLoading = false
         view.hideLoading()
         view.showEmpty()
+        showFailMessage(throwable)
     }
 
     fun setId(id: Int) {
@@ -91,27 +103,30 @@ class UnitPresenter @Inject constructor(
         return unitId == 0
     }
 
-    private fun createModel(model: UnitMeasure) {
+    private fun createModel(model: UnitRequest) {
         Timber.i("model $model")
         disposable.add(
                 unitRepository.save(model)
                         .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe({ loadLastItem() }, this::showFailMessage)
+                        .subscribeOn(Schedulers.newThread())
+                        .subscribe({ item ->
+                            Timber.i("createModel $item")
+                            showSuccessMessage()
+                            itemList.add(item)
+                            view.showResult(item)
+                        }, this::showFailMessage)
+
         )
     }
 
     override fun save(name: String, description: String) {
-
-        val unit = UnitMeasure(name, description)
-        Timber.d("unit $unit")
         if (isNewItem()) {
-            createModel(unit)
+            createModel(UnitRequest(name, description))
         } else {
-            unit.apply {
+            UnitMeasure(name, description).apply {
                 id = unitId
-            }.also {
-                unitRepository.update(it)
+            }.also { unit ->
+                unitRepository.update(unit)
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribeOn(Schedulers.io())
                         .subscribe({
@@ -125,7 +140,7 @@ class UnitPresenter @Inject constructor(
         try {
             showSuccessMessage()
             itemList[position] = unit
-            view.updateReult(position, unit)
+            view.updateResult(position, unit)
             this.position = -1
         } catch (e: IndexOutOfBoundsException) {
             Timber.e("update position error $e")
@@ -140,7 +155,7 @@ class UnitPresenter @Inject constructor(
                         .subscribe({ result ->
                             showSuccessMessage()
                             itemList[position] = result
-                            view.updateReult(position, result)
+                            view.updateResult(position, result)
                             position = -1
                         }, this::showFailMessage)
         )
@@ -156,6 +171,8 @@ class UnitPresenter @Inject constructor(
                             itemList.add(result)
                             view.showResult(result)
                         }, this::showFailMessage)
+
+
         )
     }
 
@@ -164,7 +181,24 @@ class UnitPresenter @Inject constructor(
     }
 
     private fun showFailMessage(throwable: Throwable) {
-        Timber.e("save unit showFailMessage $throwable")
-        view.showErrorMessage(R.string.action_fail)
+        Timber.e("save unit showFailMessage ${throwable.message}")
+
+        when (throwable) {
+            is HttpException -> view.getResolution().onHttpException(throwable)
+            // let your location implementation throw a custom exception on timeout, for example
+//            is NetworkLocationTimeoutException -> resolution.onNetworkLocationError()
+            else -> throwable?.apply { view.getResolution().onGenericRxException(this) }
+        }
+
+//        if (throwable.isHttpException()) {
+//
+//            view.getResolution()?.onNetworkLocationError()
+//            throwable
+//                    .httpExceptionHandler(view.contextView(), view)
+//            view.showSnackBarErrorMessage(throwable
+//                    .httpExceptionHandler(view.contextView()))
+//        } else {
+//            view.showToastErrorMessage(throwable.handleException())
+//        }
     }
 }

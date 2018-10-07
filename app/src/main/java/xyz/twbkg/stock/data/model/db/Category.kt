@@ -11,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
 data class Category(
         @ColumnInfo(name = "name")
         var name: String = "",
-        @ColumnInfo(name = "description")
+        @ColumnInfo(name = "no")
         var description: String = ""
 ):Parcelable {
     @PrimaryKey(autoGenerate = true)

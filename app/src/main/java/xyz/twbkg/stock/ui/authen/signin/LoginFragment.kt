@@ -1,7 +1,9 @@
 package xyz.twbkg.stock.ui.authen.signin
 
 
+import android.content.Intent
 import android.os.Bundle
+import android.support.annotation.StringRes
 import android.support.design.widget.Snackbar
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import kotlinx.android.synthetic.main.login_fr.*
 import xyz.twbkg.stock.R
 import xyz.twbkg.stock.application.BaseFragment
 import xyz.twbkg.stock.common.ProgressDialogFragment
+import xyz.twbkg.stock.ui.unit.UnitActivity
 import javax.inject.Inject
 
 class LoginFragment : BaseFragment(), LoginContract.View {
@@ -20,6 +23,8 @@ class LoginFragment : BaseFragment(), LoginContract.View {
     @Inject
     lateinit var presenter: LoginPresenter
     private lateinit var dialog: ProgressDialogFragment
+
+    private var snackbar: Snackbar? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +41,8 @@ class LoginFragment : BaseFragment(), LoginContract.View {
         super.onActivityCreated(savedInstanceState)
 
         addListener()
+
+        presenter.isLoggedIn()
     }
 
     private fun addListener() {
@@ -76,6 +83,8 @@ class LoginFragment : BaseFragment(), LoginContract.View {
 
     override fun navigationToMainActivity() {
         Toast.makeText(context, "Login success", Toast.LENGTH_SHORT).show()
+        startActivity(Intent(context, UnitActivity::class.java))
+        activity?.finish()
     }
 
     override fun invalidUserOrEmail(message: Int) {
@@ -88,23 +97,19 @@ class LoginFragment : BaseFragment(), LoginContract.View {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
-    override fun showErrorMessage(message: String) {
-        showSnackBar(message)
-    }
-
-    override fun showErrorMessage(message: Int) {
+    override fun showErrorMessage(@StringRes message: Int) {
         showSnackBar(getString(message))
     }
 
     private fun showSnackBar(message: String) {
-        val snackbar = Snackbar.make(
+        snackbar = Snackbar.make(
                 root_view,
                 message,
                 Snackbar.LENGTH_INDEFINITE)
                 .setAction(R.string.retry) {
                     doSignIn()
                 }
-        snackbar.show()
+        snackbar?.show()
     }
 
     companion object {

@@ -133,6 +133,10 @@
         <item name="android:imeOptions">actionNext</item>
     </style>
 
+    <style name="NoShadowButton" parent="android:style/Widget.Button">
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
     <style name="AppTheme.Button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">38dp</item>
@@ -144,7 +148,13 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
+    <style name="AppTheme.Button.Positive">
+        <item name="android:background">@drawable/selector_positive_button</item>
+    </style>
+
     <style name="AppTheme.Button.Cancel">
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:textColor">@color/gray_500</item>
         <item name="android:background">@drawable/selector_cancel_button</item>
     </style>
 

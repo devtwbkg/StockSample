@@ -95,7 +95,7 @@ class UnitListAdapter : BaseRecyclerView<UnitMeasure>() {
 
         fun onBind(data: UnitMeasure) {
             view.unit_title.apply { text = data.name }
-            view.unit_description.apply { text = data.description }
+            view.unit_description.apply { text = data.no }
         }
 
         override fun onClick(v: View) {

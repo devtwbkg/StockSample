@@ -76,8 +76,8 @@ class AddEditCategoryPresenter @Inject constructor(
     }
 //
 //    @NonNull
-//    fun saveTask(title: String, description: String): Completable {
-//        return createTask(title, description)
+//    fun saveTask(title: String, no: String): Completable {
+//        return createTask(title, no)
 //                .doOnCompleted(???({ mNavigator.onTaskSaved() }))
 //    }
 //
@@ -85,16 +85,16 @@ class AddEditCategoryPresenter @Inject constructor(
 //        return mTaskId == null
 //    }
 //
-//    private fun createTask(title: String, description: String): Completable {
+//    private fun createTask(title: String, no: String): Completable {
 //        val newTask: Task
 //        if (isNewTask()) {
-//            newTask = Task(title, description)
+//            newTask = Task(title, no)
 //            if (newTask.isEmpty()) {
 //                showSnackbar(R.string.empty_task_message)
 //                return Completable.complete()
 //            }
 //        } else {
-//            newTask = Task(title, description, mTaskId)
+//            newTask = Task(title, no, mTaskId)
 //        }
 //        return mTasksRepository.saveTask(newTask)
 //    }

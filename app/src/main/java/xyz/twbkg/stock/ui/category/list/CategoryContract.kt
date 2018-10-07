@@ -9,9 +9,6 @@ interface CategoryContract {
 
     interface View : BaseView<Presenter> {
 
-        fun showLoading()
-
-        fun hideLoading()
 
         fun showResult(items: List<Category>)
 
@@ -19,7 +16,7 @@ interface CategoryContract {
 
         fun navigationToAddEditCategory(item:Category)
 
-        fun showErrorMessage(@StringRes message:Int)
+        override fun showErrorMessage(@StringRes message:Int)
     }
 
     interface Presenter : BasePresenter<View> {

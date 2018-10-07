@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.android.synthetic.main.main_fragment.*
 import xyz.twbkg.stock.R
 import xyz.twbkg.stock.application.BaseFragment
 import xyz.twbkg.stock.networking.Scheduler
@@ -23,6 +24,7 @@ class MainFragment : BaseFragment() {
     private var errorSnackBar: Snackbar? = null
 
     private var disposables = CompositeDisposable()
+
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {

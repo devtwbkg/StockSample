@@ -7,6 +7,8 @@ import xyz.twbkg.stock.data.source.local.category.CategoryDao
 import xyz.twbkg.stock.data.source.local.category.CategoryLocalDataSource
 import xyz.twbkg.stock.data.source.local.unit.UnitDao
 import xyz.twbkg.stock.data.source.local.unit.UnitLocalDataSource
+import xyz.twbkg.stock.data.source.local.user.UserDao
+import xyz.twbkg.stock.data.source.local.user.UserLocalDataSource
 import xyz.twbkg.stock.data.source.remote.authen.AuthenRemoteDataSource
 import xyz.twbkg.stock.data.source.remote.authen.AuthenService
 import xyz.twbkg.stock.data.source.remote.category.CategoryRemoteDataSource
@@ -16,6 +18,7 @@ import xyz.twbkg.stock.data.source.remote.unit.UnitService
 import xyz.twbkg.stock.data.source.repository.AuthenticationDataSource
 import xyz.twbkg.stock.data.source.repository.CategoryDataSource
 import xyz.twbkg.stock.data.source.repository.UnitDataSource
+import xyz.twbkg.stock.data.source.repository.UserDataSource
 import xyz.twbkg.stock.data.source.scope.Remote
 import javax.inject.Singleton
 
@@ -28,6 +31,13 @@ class RepositoryModule {
     @Remote
     fun provideAuthenticationRemoteDataSource(service: AuthenService): AuthenticationDataSource {
         return AuthenRemoteDataSource(service)
+    }
+
+    @Singleton
+    @Provides
+    @Local
+    fun provideUserLocalDataSource(dao: UserDao): UserDataSource {
+        return UserLocalDataSource(dao)
     }
 
     @Singleton
@@ -47,14 +57,14 @@ class RepositoryModule {
     @Singleton
     @Provides
     @Local
-    fun provideUnitLocalDataSource(dao: UnitDao): UnitDataSource {
+    fun provideUnitLocalDataSource(dao: UnitDao): UnitDataSource.LocalDataSource {
         return UnitLocalDataSource(dao)
     }
 
     @Singleton
     @Provides
     @Remote
-    fun provideUnitRemoteDataSource(service: UnitService): UnitDataSource {
+    fun provideUnitRemoteDataSource(service: UnitService): UnitDataSource.RemoteDataSource {
         return UnitRemoteDataSource(service)
     }
 }

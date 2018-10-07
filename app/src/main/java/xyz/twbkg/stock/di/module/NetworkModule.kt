@@ -1,7 +1,6 @@
 package xyz.twbkg.stock.di.module
 
 import android.app.Application
-import android.content.Context
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.Gson
@@ -15,11 +14,14 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import xyz.twbkg.stock.BuildConfig
-import xyz.twbkg.stock.MainApp
 import xyz.twbkg.stock.constants.Constants
+import xyz.twbkg.stock.data.model.LoggedUser
+import xyz.twbkg.stock.data.model.request.RequestHeader
 import xyz.twbkg.stock.util.NetworkUtils
+import xyz.twbkg.stock.util.RequestInterceptor
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
+
 
 @Module
 class NetworkModule {
@@ -40,18 +42,26 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun providesOkHttpClient(cache: Cache): OkHttpClient {
+    fun providesRequestInterceptor(requestHeader: RequestHeader): RequestInterceptor {
+        return RequestInterceptor(requestHeader)
+    }
+
+    @Provides
+    @Singleton
+    fun providesOkHttpClient(cache: Cache, requestInterceptor: RequestInterceptor): OkHttpClient {
         val client = OkHttpClient.Builder()
                 .cache(cache)
+                .addInterceptor(requestInterceptor)
                 .connectTimeout(10, TimeUnit.SECONDS)
                 .writeTimeout(30, TimeUnit.SECONDS)
                 .readTimeout(10, TimeUnit.SECONDS)
 
         if (BuildConfig.DEBUG) {
             client.addNetworkInterceptor(StethoInterceptor())
-            val logging = HttpLoggingInterceptor().apply {
-                level = HttpLoggingInterceptor.Level.BODY
-            }
+            val logging = HttpLoggingInterceptor()
+                    .apply {
+                        level = HttpLoggingInterceptor.Level.BODY
+                    }
 
             client.addInterceptor(logging)
         }
@@ -85,7 +95,11 @@ class NetworkModule {
         return RxJava2CallAdapterFactory.create()
     }
 
-//    @Provides
-//    @Singleton
-//    fun providesNetworkUtil(context: Application): NetworkUtils = NetworkUtils(context)
+    @Provides
+    @Singleton
+    fun provideUserLoggedIn() = LoggedUser()
+
+    @Provides
+    @Singleton
+    fun providesNetworkUtil(context: Application): NetworkUtils = NetworkUtils(context)
 }

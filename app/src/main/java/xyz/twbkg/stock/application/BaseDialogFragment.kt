@@ -9,9 +9,6 @@ import android.support.v4.app.DialogFragment
 import android.view.KeyEvent
 import android.view.ViewGroup
 import android.view.Window
-import android.view.WindowManager
-import android.widget.FrameLayout
-import android.widget.LinearLayout
 
 
 abstract class BaseDialogFragment : DialogFragment() {
@@ -36,5 +33,5 @@ abstract class BaseDialogFragment : DialogFragment() {
 
     abstract fun restoreInstanceState(bundle: Bundle)
 
-    abstract fun restoreArguments(bundle: Bundle)
+    abstract fun restoreArguments(bundle: Bundle?)
 }

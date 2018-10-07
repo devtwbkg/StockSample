@@ -8,16 +8,19 @@ import xyz.twbkg.stock.data.source.repository.UnitDataSource
 import xyz.twbkg.stock.data.source.scope.Local
 import xyz.twbkg.stock.data.source.scope.Remote
 import javax.inject.Inject
-import javax.inject.Singleton
 import android.support.annotation.NonNull
+import xyz.twbkg.stock.data.model.request.UnitRequest
+import xyz.twbkg.stock.data.model.response.FindResponse
+import javax.inject.Singleton
 import kotlin.collections.LinkedHashMap
 
 
 @Singleton
 class UnitRepository @Inject constructor(
-        @Remote val remoteDataSource: UnitDataSource,
-        @Local val localDataSource: UnitDataSource
+        @Remote val remoteDataSource: UnitDataSource.RemoteDataSource,
+        @Local val localDataSource: UnitDataSource.LocalDataSource
 ) : UnitDataSource {
+
     /**
      * This variable has public visibility so it can be accessed from tests.
      */
@@ -29,6 +32,10 @@ class UnitRepository @Inject constructor(
      */
     var cacheIsDirty = false
 
+
+    override fun findFromServer(): Flowable<FindResponse<UnitMeasure>> {
+        return Flowable.just(null)
+    }
 
     override fun findAll(): Flowable<List<UnitMeasure>> {
         // Respond immediately with cache if available and not dirty
@@ -54,7 +61,9 @@ class UnitRepository @Inject constructor(
         }
     }
 
-    override fun findLastId(): Flowable<UnitMeasure> = localDataSource.findLastId()
+    override fun findLastId(): Flowable<UnitMeasure> {
+        return remoteDataSource.getLastRemote()
+    }
 
     override fun findById(id: Int): Flowable<UnitMeasure> {
         val cachedUnit = getWithId(id)
@@ -73,9 +82,9 @@ class UnitRepository @Inject constructor(
 
         val local = getWithIdFromLocalRepository(id)
         val remote = remoteDataSource
-                .findById(id)
+                .getByIdRemote(id)
                 .doOnNext { item ->
-                    localDataSource.save(item)
+                    localDataSource.saveLocal(item)
                     cachedItem.put(item.id, item)
                 }
 
@@ -85,18 +94,33 @@ class UnitRepository @Inject constructor(
     }
 
     override fun save(model: UnitMeasure): Completable {
-        return remoteDataSource.save(model)
-                .andThen(localDataSource.save(model))
+        return Completable.fromAction { remoteDataSource.saveRemote(UnitRequest(model.name, model.no)) }
+                .andThen(localDataSource.saveLocal(model))
+    }
+
+    override fun save(model: UnitRequest): Flowable<UnitMeasure> {
+        return remoteDataSource.saveRemote(UnitRequest(model.name, model.no))
+                .flatMap { response ->
+                    Flowable.just(response.model)
+                            .doOnNext { source ->
+                                Timber.i("task result $source")
+                                localDataSource.saveLocal(source)
+                                cachedItem.put(source.id, source)
+                            }
+                }
+                .doOnComplete { cacheIsDirty = false }
     }
 
     override fun saveAll(models: List<UnitMeasure>): Completable {
-        return remoteDataSource.saveAll(models)
-                .andThen(localDataSource.saveAll(models))
+        var postServer = arrayListOf<UnitRequest>()
+        models.forEach { postServer.add(UnitRequest(it.name, it.no)) }
+        return remoteDataSource.saveAllRemote(postServer)
+                .andThen(localDataSource.saveAllLocal(models))
     }
 
     override fun update(model: UnitMeasure): Completable {
-        return remoteDataSource.update(model)
-                .andThen(localDataSource.update(model))
+        return remoteDataSource.updateRemote(model)
+                .andThen(localDataSource.updateLocal(model))
     }
 
     override fun refreshData() {
@@ -104,22 +128,22 @@ class UnitRepository @Inject constructor(
     }
 
     override fun deleteAll(): Completable {
-        return remoteDataSource.deleteAll()
-                .andThen(localDataSource.deleteAll())
+        return remoteDataSource.deleteAllRemote()
+                .andThen(localDataSource.deleteAllLocal())
     }
 
     override fun delete(id: Int): Completable {
-        return remoteDataSource.delete(id)
-                .andThen(localDataSource.delete(id))
+        return remoteDataSource.deleteRemote(id)
+                .andThen(localDataSource.deleteLocal(id))
     }
 
 
     private fun getAndCacheLocalTasks(): Flowable<List<UnitMeasure>> {
         return localDataSource
-                .findAll()
-                .flatMap { tasks ->
-                    Timber.i("tasks getAndCacheLocalTasks ${tasks.size}")
-                    Flowable.fromIterable(tasks)
+                .getAllLocal()
+                .flatMap { models ->
+                    Timber.i("tasks getAndCacheLocalTasks ${models.size}")
+                    Flowable.fromIterable(models)
                             .doOnNext { task -> cachedItem.put(task.id, task) }
                             .toList()
                             .toFlowable()
@@ -128,15 +152,14 @@ class UnitRepository @Inject constructor(
 
     private fun getAndSaveRemoteTasks(): Flowable<List<UnitMeasure>> {
         return remoteDataSource
-                .findAll()
-                .flatMap { tasks ->
-                    Timber.i("tasks getAndSaveRemoteTasks ${tasks.size}")
+                .getAllRemote()
+                .flatMap { response ->
                     Flowable
-                            .fromIterable(tasks)
-                            .doOnNext { task ->
-                                Timber.i("task result $task")
-                                localDataSource.save(task)
-                                cachedItem.put(task.id, task)
+                            .fromIterable(response.content)
+                            .doOnNext { source ->
+                                Timber.i("task result $source")
+                                localDataSource.saveLocal(source)
+                                cachedItem.put(source.id, source)
                             }
                             .toList()
                             .toFlowable()
@@ -155,10 +178,11 @@ class UnitRepository @Inject constructor(
 
     private fun getWithIdFromLocalRepository(@NonNull id: Int): Flowable<UnitMeasure> {
         return localDataSource
-                .findById(id)
-                .doOnNext { taskOptional ->
-                    cachedItem.put(id, taskOptional)
+                .getByIdLocal(id)
+                .doOnNext { source ->
+                    cachedItem.put(id, source)
                 }
-                .firstElement().toFlowable()
     }
+
+
 }

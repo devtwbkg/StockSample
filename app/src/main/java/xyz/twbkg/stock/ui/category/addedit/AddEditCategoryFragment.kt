@@ -1,6 +1,7 @@
 package xyz.twbkg.stock.ui.category.addedit
 
 import android.os.Bundle
+import android.support.annotation.StringRes
 import android.view.*
 import android.widget.Toast
 import kotlinx.android.synthetic.main.add_edit_category_fragment.*
@@ -25,8 +26,8 @@ class AddEditCategoryFragment : BaseFragment(),
         Toast.makeText(context, messageString, Toast.LENGTH_SHORT).show()
     }
 
-    override fun showErrorMessage(messageString: Int) {
-        Toast.makeText(context, messageString, Toast.LENGTH_SHORT).show()
+    override fun showErrorMessage(message: Int) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun showToast(string: String) {
@@ -71,6 +72,14 @@ class AddEditCategoryFragment : BaseFragment(),
         }
     }
 
+    override fun showLoading() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun hideLoading() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
     private fun setIdToPresenter(id: Int) {
         presenter.setId(id)
     }
@@ -83,7 +92,7 @@ class AddEditCategoryFragment : BaseFragment(),
     private fun validateField(): Boolean {
         val name = input_username_or_email_edt?.text.toString()
         val description = input_password_edt?.text.toString()
-        Timber.d("validateField $name description $description")
+        Timber.d("validateField $name no $description")
         if (name.isEmpty() || description.isEmpty()) {
             showEmptyError()
             return false

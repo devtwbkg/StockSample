@@ -30,7 +30,7 @@ class CreateDialogFragment : BaseDialogFragment(), TextView.OnEditorActionListen
     override fun restoreInstanceState(bundle: Bundle) {
     }
 
-    override fun restoreArguments(bundle: Bundle) {
+    override fun restoreArguments(bundle: Bundle?) {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +46,7 @@ class CreateDialogFragment : BaseDialogFragment(), TextView.OnEditorActionListen
             setOnEditorActionListener(this@CreateDialogFragment)
         }
         dialog.window?.setSoftInputMode(
-                WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN)
 
         submit_btn?.apply {
             setOnClickListener {

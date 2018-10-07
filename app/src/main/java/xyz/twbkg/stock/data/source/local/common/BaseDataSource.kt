@@ -3,10 +3,13 @@ package xyz.twbkg.stock.data.source.local.common
 import android.support.annotation.NonNull
 import io.reactivex.Completable
 import io.reactivex.Flowable
+import xyz.twbkg.stock.data.model.response.FindResponse
 
 interface BaseDataSource<T> {
 
     fun findLastId(): Flowable<T>
+
+    fun findFromServer(): Flowable<FindResponse<T>>
 
     fun findAll(): Flowable<List<T>>
 

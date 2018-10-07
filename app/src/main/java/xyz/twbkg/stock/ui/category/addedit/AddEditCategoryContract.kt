@@ -13,9 +13,6 @@ interface AddEditCategoryContract {
         fun showEmptyError()
 
         fun showSuccessMessage(@StringRes messageString: Int)
-
-        fun showErrorMessage(@StringRes messageString: Int)
-
     }
 
     interface Presenter : BasePresenter<View> {

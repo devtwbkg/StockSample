@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.unit_dialog_view_fr.*
 import xyz.twbkg.stock.R
-import xyz.twbkg.stock.R.id.cancel_btn
 import xyz.twbkg.stock.application.BaseDialogFragment
 import xyz.twbkg.stock.data.model.db.UnitMeasure
 
@@ -47,7 +46,7 @@ class ViewDialogFragment : BaseDialogFragment() {
         bundle?.let { unit = it.getParcelable(ARG_MODEL) }
     }
 
-    override fun restoreArguments(bundle: Bundle) {
+    override fun restoreArguments(bundle: Bundle?) {
         bundle?.let { unit = it.getParcelable(ARG_MODEL) }
     }
 
@@ -62,7 +61,7 @@ class ViewDialogFragment : BaseDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         dialog_title_tv?.apply { text = "${getString(R.string.title_edit)}: ${unit.name}" }
         name_tv?.apply { text = unit.name }
-        description_tv?.apply { text = unit.description }
+        description_tv?.apply { text = unit.no }
 
         submit_btn?.apply {
             cancel_btn?.apply {

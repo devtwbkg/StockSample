@@ -4,6 +4,7 @@ import io.reactivex.Completable
 import io.reactivex.Flowable
 import timber.log.Timber
 import xyz.twbkg.stock.data.model.db.Category
+import xyz.twbkg.stock.data.model.response.FindResponse
 import xyz.twbkg.stock.data.source.repository.CategoryDataSource
 import xyz.twbkg.stock.data.source.scope.Local
 import xyz.twbkg.stock.data.source.scope.Remote
@@ -29,6 +30,9 @@ class CategoryRepository @Inject constructor(
      */
     var cacheIsDirty = false
 
+    override fun findFromServer(): Flowable<FindResponse<Category>> {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     override fun findAll(): Flowable<List<Category>> {
         // Respond immediately with cache if available and not dirty

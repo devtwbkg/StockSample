@@ -1,14 +1,143 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/root_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.authen.SignUpFragment">
+    android:layout_gravity="center">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v4.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <android.support.v7.widget.LinearLayoutCompat
+                style="@style/AppTheme.DialogEdiText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="12dp"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <android.support.v7.widget.AppCompatTextView
+                    android:id="@+id/dialog_title_tv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/kanit_regular"
+                    android:gravity="center"
+                    android:maxLines="1"
+                    android:padding="8dp"
+                    android:singleLine="true"
+                    android:text="@string/sign_in"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray_700"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/gray_300" />
+
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="260dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:padding="16dp">
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/input_username_edt"
+                        style="@style/AppTheme.EditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:hint="username"
+                        android:nextFocusDown="@+id/input_email_edt"
+                        android:selectAllOnFocus="true"
+                        android:singleLine="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/input_email_edt"
+                        style="@style/AppTheme.EditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="email"
+                        android:nextFocusDown="@+id/input_name_edt"
+                        android:selectAllOnFocus="true"
+                        android:singleLine="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/input_username_edt" />
+
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/input_name_edt"
+                        style="@style/AppTheme.EditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="nname"
+                        android:nextFocusDown="@+id/input_password_edt"
+                        android:selectAllOnFocus="true"
+                        android:singleLine="true"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/input_email_edt" />
+
+
+                    <android.support.v7.widget.AppCompatEditText
+                        android:id="@+id/input_password_edt"
+                        style="@style/AppTheme.EditText"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:hint="@string/password"
+                        android:imeOptions="actionDone"
+                        android:inputType="textPassword"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/input_name_edt" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <android.support.v7.widget.LinearLayoutCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="horizontal">
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/signup_btn"
+                        style="@style/AppTheme.Button.Cancel"
+                        android:layout_marginEnd="8dp"
+                        android:text="@string/sig_up"
+                        app:layout_constraintStart_toStartOf="@+id/input_password_edt"
+                        app:layout_constraintTop_toBottomOf="@+id/input_password_edt" />
+
+                    <android.support.v7.widget.AppCompatButton
+                        android:id="@+id/submit_btn"
+                        style="@style/AppTheme.Button.Submit"
+                        android:layout_marginStart="8dp"
+                        android:text="@string/sign_in"
+                        app:layout_constraintEnd_toEndOf="@+id/input_password_edt"
+                        app:layout_constraintTop_toBottomOf="@+id/input_password_edt" />
+
+                </android.support.v7.widget.LinearLayoutCompat>
+            </android.support.v7.widget.LinearLayoutCompat>
+        </FrameLayout>
+    </android.support.v4.widget.NestedScrollView>
 </FrameLayout>

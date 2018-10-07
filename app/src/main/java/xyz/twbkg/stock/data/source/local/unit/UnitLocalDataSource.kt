@@ -11,41 +11,36 @@ import javax.inject.Singleton
 @Singleton
 class UnitLocalDataSource @Inject constructor(
         var dao: UnitDao
-) : UnitDataSource {
-
-    override fun findAll(): Flowable<List<UnitMeasure>> = Flowable.fromCallable {
-        dao.findAll()
+) : UnitDataSource.LocalDataSource {
+    override fun getLastLocal(): Flowable<UnitMeasure> {
+        return Flowable.fromCallable { dao.findLastId() }
     }
 
-    override fun findLastId(): Flowable<UnitMeasure> = Flowable.fromCallable {
-        dao.findLastId()
+    override fun getAllLocal(): Flowable<List<UnitMeasure>> {
+        return Flowable.fromCallable { dao.findAll() }
     }
 
-    override fun findById(id: Int): Flowable<UnitMeasure> = Flowable.fromCallable {
-        dao.findById(id)
+    override fun getByIdLocal(id: Int): Flowable<UnitMeasure> {
+        return Flowable.fromCallable { dao.findById(id) }
     }
 
-    override fun save(model: UnitMeasure): Completable = Completable.fromAction {
-        dao.insert(model)
+    override fun saveLocal(model: UnitMeasure): Completable {
+        return Completable.fromAction { dao.insert(model) }
     }
 
-    override fun saveAll(models: List<UnitMeasure>): Completable = Completable.fromAction {
-        dao.insertAll(models)
+    override fun saveAllLocal(models: List<UnitMeasure>): Completable {
+        return Completable.fromAction { dao.insertAll(models) }
     }
 
-    override fun update(model: UnitMeasure): Completable = Completable.fromAction {
-        dao.update(model)
+    override fun updateLocal(model: UnitMeasure): Completable {
+        return Completable.fromAction { dao.update(model) }
     }
 
-    override fun refreshData() {
+    override fun deleteAllLocal(): Completable {
+        return Completable.fromAction { dao.delete() }
     }
 
-    override fun deleteAll(): Completable = Completable.fromAction {
-        dao.delete()
+    override fun deleteLocal(id: Int): Completable {
+        return Completable.fromAction { dao.deleteById(id) }
     }
-
-    override fun delete(id: Int): Completable = Completable.fromAction {
-        dao.deleteById(id)
-    }
-
 }

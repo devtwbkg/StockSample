@@ -1,8 +1,7 @@
-package xyz.twbkg.stock.ui.authen
+package xyz.twbkg.stock.ui.authen.signup
 
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

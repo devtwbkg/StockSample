@@ -18,4 +18,8 @@ class AuthenActivity : BaseActivity() {
 
         inflateFragment(LoginFragment.newInstance())
     }
+
+    private fun namageLayout(){
+
+    }
 }

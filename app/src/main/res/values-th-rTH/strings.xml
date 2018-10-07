@@ -53,6 +53,17 @@
     <string name="sig_up">ลงทะเบียน</string>
     <string name="please_wait">กรุณารอสักครู่</string>
     <string name="error_connection_timeout">หมดเวลาการเชื่อมต่อ</string>
-    <string name="unknown_error">เกิดข้อผิดพลาด</string>
+    <string name="error_unknown_error">เกิดข้อผิดพลาด</string>
     <string name="error_data_or_wifi_is_not_available">ไม่พบการเชือมต่อ ตรวจสอบให้แน่ใจว่าเปิด Wi-Fi หรือข้อมูลมือถือแล้วลองอีกครั้ง</string>
+    <string name="error_you_are_not_authorized_to_access">Sorry, You\'re not authorized to access this resource.</string>
+
+
+    <string name="error_no_network_connection">Sorry, application does not yet support offline mode. Please, enable your network connection</string>
+    <string name="error_not_found">Not Found</string>
+    <string name="error_service_unavailable">Service Unavailable</string>
+    <string name="error_http_exception">Http Exception</string>
+    <string name="error_enable_gps">GPS is disabled</string>
+    <string name="error_unauthorized">Unauthorized,Please login gain</string>
+    <string name="error_internal_server_error">Internal Server Error</string>
+    <string name="alert">แจ้งเตือน</string>
 </resources>

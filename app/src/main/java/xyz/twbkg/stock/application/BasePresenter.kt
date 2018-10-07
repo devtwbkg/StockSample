@@ -16,5 +16,4 @@ interface BasePresenter<T> {
     fun refreshData()
 
 
-
 }

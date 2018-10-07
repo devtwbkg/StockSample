@@ -3,6 +3,7 @@ package xyz.twbkg.stock.data.source.remote.category
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import xyz.twbkg.stock.data.model.db.Category
+import xyz.twbkg.stock.data.model.response.FindResponse
 import xyz.twbkg.stock.data.source.repository.CategoryDataSource
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -16,7 +17,11 @@ class CategoryRemoteDataSource @Inject constructor(
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun findAll(): Flowable<List<Category>> = service.getAll()
+    override fun findFromServer(): Flowable<FindResponse<Category>> {
+        return service.getAll()
+    }
+
+    override fun findAll(): Flowable<List<Category>> = Flowable.just(null)
 
     override fun findById(id: Int): Flowable<Category> = service.getById(id)
 

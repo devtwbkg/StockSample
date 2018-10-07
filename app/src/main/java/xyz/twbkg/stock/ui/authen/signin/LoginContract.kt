@@ -7,19 +7,16 @@ import xyz.twbkg.stock.ui.unit.UnitContract
 
 interface LoginContract {
     interface View : BaseView<UnitContract.Presenter> {
-        fun showLoading()
-        fun hideLoading()
         fun enableButton()
         fun disableButton()
         fun navigationToMainActivity()
         fun invalidUserOrEmail(@StringRes message: Int)
         fun invalidPassword(@StringRes message: Int)
-        fun showErrorMessage(@StringRes message: Int)
-        fun showErrorMessage(@StringRes message: String)
     }
 
     interface Presenter : BasePresenter<UnitContract.View> {
         fun signIn(userNameOrEmail: String, password: String)
+        fun isLoggedIn()
     }
 
 }
