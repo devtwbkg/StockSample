@@ -1,6 +1,6 @@
 package xyz.twbkg.stock.util.extension
 import android.content.ContextWrapper
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.view.View
 
 fun View.getParentActivity(): AppCompatActivity?{

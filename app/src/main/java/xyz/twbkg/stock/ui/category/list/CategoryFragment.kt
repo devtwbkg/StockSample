@@ -1,13 +1,13 @@
 package xyz.twbkg.stock.ui.category.list
 
-import android.arch.lifecycle.Observer
-import android.arch.lifecycle.ViewModelProvider
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import android.content.Intent
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v4.app.Fragment
-import android.support.v7.widget.DividerItemDecoration
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import android.view.*
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -65,7 +65,7 @@ class CategoryFragment : BaseFragment(),
             }
         })
         category_list?.apply {
-            addItemDecoration(DividerItemDecoration(context, LinearLayout.VERTICAL))
+            addItemDecoration(androidx.recyclerview.widget.DividerItemDecoration(context, LinearLayout.VERTICAL))
             adapter = categoryListAdapter
         }
 

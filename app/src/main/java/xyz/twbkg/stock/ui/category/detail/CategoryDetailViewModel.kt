@@ -1,6 +1,6 @@
 package xyz.twbkg.stock.ui.category.detail
 
-import android.arch.lifecycle.ViewModel
+import androidx.lifecycle.ViewModel
 
 class CategoryDetailViewModel : ViewModel() {
     // TODO: Implement the ViewModel

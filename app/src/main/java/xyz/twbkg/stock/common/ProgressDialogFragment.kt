@@ -5,14 +5,14 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.annotation.StringRes
-import android.support.v4.app.DialogFragment
+import androidx.annotation.StringRes
+import androidx.fragment.app.DialogFragment
 import android.view.*
 
 import kotlinx.android.synthetic.main.progress_dialog_view.*
 import xyz.twbkg.stock.R
 
-class ProgressDialogFragment : DialogFragment(), UpdateTitleCallback {
+class ProgressDialogFragment : androidx.fragment.app.DialogFragment(), UpdateTitleCallback {
     override fun updateTitle(message: Int) {
         this.message = message
         setupView(this.message)

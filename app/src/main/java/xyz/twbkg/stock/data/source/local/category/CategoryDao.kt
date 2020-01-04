@@ -1,6 +1,6 @@
 package xyz.twbkg.stock.data.source.local.category
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import io.reactivex.Flowable
 import xyz.twbkg.stock.data.model.db.Category
 

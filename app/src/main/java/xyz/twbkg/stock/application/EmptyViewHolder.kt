@@ -1,8 +1,8 @@
 package xyz.twbkg.stock.application
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.View
 
 class EmptyViewHolder(private val view: View) :
-        RecyclerView.ViewHolder(view) {
+        androidx.recyclerview.widget.RecyclerView.ViewHolder(view) {
 }

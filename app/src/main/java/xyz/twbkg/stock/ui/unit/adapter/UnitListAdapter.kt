@@ -1,6 +1,6 @@
 package xyz.twbkg.stock.ui.unit.adapter
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -57,7 +57,7 @@ class UnitListAdapter : BaseRecyclerView<UnitMeasure>() {
     }
 
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): androidx.recyclerview.widget.RecyclerView.ViewHolder {
         val binding: View = LayoutInflater.from(parent.context).inflate(viewType, parent, false)
         return if (viewType == TYPE_ITEM) {
             ItemViewHolder(binding)
@@ -80,14 +80,14 @@ class UnitListAdapter : BaseRecyclerView<UnitMeasure>() {
         itemList.size
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: androidx.recyclerview.widget.RecyclerView.ViewHolder, position: Int) {
         if (holder is ItemViewHolder) {
             holder.onBind(itemList[position])
         }
     }
 
     inner class ItemViewHolder(private val view: View) :
-            RecyclerView.ViewHolder(view), View.OnClickListener {
+            androidx.recyclerview.widget.RecyclerView.ViewHolder(view), View.OnClickListener {
 
         init {
             view.setOnClickListener(this)

@@ -1,9 +1,9 @@
 package xyz.twbkg.stock.application
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import android.view.MenuItem
 import android.view.WindowManager
 import dagger.android.AndroidInjector
@@ -14,10 +14,10 @@ import javax.inject.Inject
 
 abstract class BaseActivity : AppCompatActivity(), Injectable, HasSupportFragmentInjector {
     @Inject
-    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<Fragment>
+    lateinit var dispatchingAndroidInjector: DispatchingAndroidInjector<androidx.fragment.app.Fragment>
 
 
-    override fun supportFragmentInjector(): AndroidInjector<Fragment> {
+    override fun supportFragmentInjector(): AndroidInjector<androidx.fragment.app.Fragment> {
         return dispatchingAndroidInjector
     }
 

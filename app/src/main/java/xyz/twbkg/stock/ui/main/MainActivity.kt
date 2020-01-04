@@ -1,7 +1,7 @@
 package xyz.twbkg.stock.ui.main
 
 import android.os.Bundle
-import android.support.v7.widget.Toolbar
+import androidx.appcompat.widget.Toolbar
 import kotlinx.android.synthetic.main.toolbar.*
 import xyz.twbkg.stock.R
 import xyz.twbkg.stock.application.BaseActivity

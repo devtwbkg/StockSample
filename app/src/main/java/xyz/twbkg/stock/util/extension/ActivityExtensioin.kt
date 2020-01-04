@@ -1,10 +1,10 @@
 package xyz.twbkg.stock.util.extension
 
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import xyz.twbkg.stock.R
 
-fun AppCompatActivity.inflateFragment(fragment: Fragment) {
+fun AppCompatActivity.inflateFragment(fragment: androidx.fragment.app.Fragment) {
     this.supportFragmentManager.beginTransaction()
             .replace(R.id.container, fragment)
             .commitNow()

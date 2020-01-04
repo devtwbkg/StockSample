@@ -1,7 +1,7 @@
 package xyz.twbkg.stock.ui.category.addedit
 
 import android.os.Bundle
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import android.view.*
 import android.widget.Toast
 import kotlinx.android.synthetic.main.add_edit_category_fragment.*

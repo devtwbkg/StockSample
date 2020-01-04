@@ -1,7 +1,7 @@
 package xyz.twbkg.stock.data.source.database
 
-import android.arch.persistence.room.Database
-import android.arch.persistence.room.RoomDatabase
+import androidx.room.Database
+import androidx.room.RoomDatabase
 import xyz.twbkg.stock.data.source.local.category.CategoryDao
 import xyz.twbkg.stock.data.model.db.Category
 import xyz.twbkg.stock.data.model.db.UnitMeasure

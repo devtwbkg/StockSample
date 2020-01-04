@@ -1,6 +1,6 @@
 package xyz.twbkg.stock.ui.authen.signin
 
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import xyz.twbkg.stock.application.BasePresenter
 import xyz.twbkg.stock.application.BaseView
 import xyz.twbkg.stock.ui.unit.UnitContract

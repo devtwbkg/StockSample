@@ -8,7 +8,7 @@ import xyz.twbkg.stock.data.source.repository.UnitDataSource
 import xyz.twbkg.stock.data.source.scope.Local
 import xyz.twbkg.stock.data.source.scope.Remote
 import javax.inject.Inject
-import android.support.annotation.NonNull
+import androidx.annotation.NonNull
 import xyz.twbkg.stock.data.model.request.UnitRequest
 import xyz.twbkg.stock.data.model.response.FindResponse
 import javax.inject.Singleton

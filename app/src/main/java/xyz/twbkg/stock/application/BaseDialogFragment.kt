@@ -5,13 +5,13 @@ import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.support.v4.app.DialogFragment
+import androidx.fragment.app.DialogFragment
 import android.view.KeyEvent
 import android.view.ViewGroup
 import android.view.Window
 
 
-abstract class BaseDialogFragment : DialogFragment() {
+abstract class BaseDialogFragment : androidx.fragment.app.DialogFragment() {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val dialog = Dialog(activity)

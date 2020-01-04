@@ -1,6 +1,6 @@
 package xyz.twbkg.stock.ui.category.list
 
-import android.support.annotation.StringRes
+import androidx.annotation.StringRes
 import xyz.twbkg.stock.application.BasePresenter
 import xyz.twbkg.stock.application.BaseView
 import xyz.twbkg.stock.data.model.db.Category

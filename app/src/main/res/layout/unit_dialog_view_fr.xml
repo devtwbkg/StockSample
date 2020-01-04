@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/AppTheme.DialogEdiText">
 
-    <android.support.v7.widget.LinearLayoutCompat
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -12,7 +12,7 @@
         android:orientation="vertical"
         android:padding="8dp">
 
-        <android.support.v7.widget.AppCompatTextView
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/dialog_title_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,13 +37,13 @@
             android:background="@color/gray_300" />
 
 
-        <android.support.constraint.ConstraintLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="260dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="16dp">
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/name_tv"
                 style="@style/AppTheme.EditText"
                 android:layout_width="0dp"
@@ -53,7 +53,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
 
-            <android.support.v7.widget.AppCompatTextView
+            <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/description_tv"
                 style="@style/AppTheme.EditText"
                 android:layout_width="0dp"
@@ -63,15 +63,15 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/name_tv" />
 
-        </android.support.constraint.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <android.support.v7.widget.LinearLayoutCompat
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="horizontal">
 
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/cancel_btn"
                 style="@style/AppTheme.Button.Cancel"
                 android:layout_marginEnd="8dp"
@@ -79,7 +79,7 @@
                 app:layout_constraintStart_toStartOf="@+id/input_password_edt"
                 app:layout_constraintTop_toBottomOf="@+id/input_password_edt" />
 
-            <android.support.v7.widget.AppCompatButton
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/submit_btn"
                 style="@style/AppTheme.Button.Submit"
                 android:layout_marginStart="8dp"
@@ -87,6 +87,6 @@
                 app:layout_constraintEnd_toEndOf="@+id/input_password_edt"
                 app:layout_constraintTop_toBottomOf="@+id/input_password_edt" />
 
-        </android.support.v7.widget.LinearLayoutCompat>
-    </android.support.v7.widget.LinearLayoutCompat>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </FrameLayout>

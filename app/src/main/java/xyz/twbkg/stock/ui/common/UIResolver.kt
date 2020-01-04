@@ -1,7 +1,7 @@
 package xyz.twbkg.stock.ui.common
 
-import android.support.design.widget.Snackbar
-import android.support.v4.app.FragmentManager
+import com.google.android.material.snackbar.Snackbar
+import androidx.fragment.app.FragmentManager
 import android.view.View
 import android.widget.Toast
 import xyz.twbkg.stock.common.ErrorDialogFragment
@@ -14,13 +14,13 @@ class UIResolver {
 //    @Inject constructor(var rootView: View)
 
     private lateinit var rootView: View
-    private var fragmentManager: FragmentManager? = null
+    private var fragmentManager: androidx.fragment.app.FragmentManager? = null
     private var persistentSnackbar: Snackbar? = null
     private lateinit var errorDialogFragment: ErrorDialogFragment
 
     fun provideRootView(
             rootView: View,
-            fragmentManager: FragmentManager? = null
+            fragmentManager: androidx.fragment.app.FragmentManager? = null
     ) {
         this.rootView = rootView
         this.fragmentManager = fragmentManager

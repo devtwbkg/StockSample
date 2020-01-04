@@ -1,8 +1,8 @@
 package xyz.twbkg.stock.application
 
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView
 
-abstract class BaseRecyclerView<T> : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+abstract class BaseRecyclerView<T> : androidx.recyclerview.widget.RecyclerView.Adapter<androidx.recyclerview.widget.RecyclerView.ViewHolder>() {
 
     abstract fun addCallback(callback: AdapterListAdapterCallback)
 

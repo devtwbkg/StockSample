@@ -1,6 +1,6 @@
 package xyz.twbkg.stock.util
 
-import android.arch.lifecycle.Transformations.map
+import androidx.lifecycle.Transformations.map
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers

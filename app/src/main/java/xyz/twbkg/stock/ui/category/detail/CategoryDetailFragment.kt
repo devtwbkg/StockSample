@@ -1,6 +1,6 @@
 package xyz.twbkg.stock.ui.category.detail
 
-import android.arch.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProviders
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View

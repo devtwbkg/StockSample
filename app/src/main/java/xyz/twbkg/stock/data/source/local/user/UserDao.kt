@@ -1,6 +1,6 @@
 package xyz.twbkg.stock.data.source.local.user
 
-import android.arch.persistence.room.*
+import androidx.room.*
 import xyz.twbkg.stock.data.model.db.User
 
 @Dao

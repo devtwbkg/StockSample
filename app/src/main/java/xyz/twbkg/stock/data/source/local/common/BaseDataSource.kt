@@ -1,6 +1,6 @@
 package xyz.twbkg.stock.data.source.local.common
 
-import android.support.annotation.NonNull
+import androidx.annotation.NonNull
 import io.reactivex.Completable
 import io.reactivex.Flowable
 import xyz.twbkg.stock.data.model.response.FindResponse
